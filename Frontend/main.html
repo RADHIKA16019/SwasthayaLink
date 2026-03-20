@@ -1,0 +1,2567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwasthayaLink – Your Complete Health Companion</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SWASTHAYALINK — GLOBAL DESIGN SYSTEM
+   Aesthetic: Clinical Luxury — clean precision meets warm vitality
+═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  /* Color Tokens */
+  --emerald:       #00C896;
+  --emerald-deep:  #00A07A;
+  --emerald-mist:  #E6FAF4;
+  --sapphire:      #0EA5E9;
+  --sapphire-mist: #E0F4FF;
+  --coral:         #FF4757;
+  --coral-mist:    #FFF0F1;
+  --amber:         #F59E0B;
+  --amber-mist:    #FFF8E7;
+  --violet:        #7C3AED;
+  --violet-mist:   #F5F0FF;
+
+  /* Light Theme */
+  --bg-base:    #F7FDFB;
+  --bg-surface: #FFFFFF;
+  --bg-subtle:  #F0FAF6;
+  --border:     rgba(0,200,150,0.15);
+  --border-hard:#E2EBE8;
+  --text-1:     #0D1F1A;
+  --text-2:     #2D5048;
+  --text-3:     #6B8E82;
+  --text-4:     #A8C4BB;
+  --shadow-sm:  0 2px 8px rgba(0,150,100,0.08);
+  --shadow-md:  0 8px 32px rgba(0,150,100,0.12);
+  --shadow-lg:  0 20px 60px rgba(0,150,100,0.18);
+  --shadow-glow:0 0 40px rgba(0,200,150,0.25);
+
+  /* Spacing */
+  --nav-h:64px;
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:32px;
+}
+
+[data-theme="dark"]{
+  --bg-base:    #0A1412;
+  --bg-surface: #111C19;
+  --bg-subtle:  #162420;
+  --border:     rgba(0,200,150,0.12);
+  --border-hard:#1E3530;
+  --text-1:     #E8F5F1;
+  --text-2:     #A0C4BA;
+  --text-3:     #5A8578;
+  --text-4:     #2E5049;
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md:  0 8px 32px rgba(0,0,0,0.5);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.6);
+}
+
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg-base);
+  color:var(--text-1);
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background 0.4s ease,color 0.4s ease;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--emerald);border-radius:99px;}
+
+/* ── TYPOGRAPHY ── */
+.font-display{font-family:'Fraunces',serif;}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.2;}
+.text-gradient{
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:var(--nav-h);
+  background:rgba(247,253,251,0.85);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.4s;
+}
+[data-theme="dark"] .navbar{background:rgba(10,20,18,0.9);}
+.navbar-inner{
+  max-width:1200px;margin:0 auto;height:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;cursor:pointer;
+}
+.nav-logo{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:var(--shadow-sm);
+  flex-shrink:0;
+}
+.nav-title{
+  font-family:'Fraunces',serif;
+  font-size:22px;font-weight:800;
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.5px;
+}
+.nav-actions{display:flex;align-items:center;gap:8px;}
+.nav-btn{
+  width:40px;height:40px;border-radius:12px;border:none;
+  background:var(--bg-subtle);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-2);font-size:18px;
+  transition:background 0.2s,transform 0.15s;
+}
+.nav-btn:hover{background:var(--emerald-mist);transform:scale(1.05);}
+
+/* ── DRAWER ── */
+.drawer-overlay{
+  position:fixed;inset:0;z-index:950;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);
+  animation:fadeIn 0.2s ease;
+}
+.drawer{
+  position:fixed;left:0;top:0;bottom:0;z-index:960;
+  width:300px;background:var(--bg-surface);
+  box-shadow:var(--shadow-lg);
+  display:flex;flex-direction:column;
+  animation:slideInLeft 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.drawer-header{
+  padding:24px 24px 16px;
+  border-bottom:1px solid var(--border-hard);
+}
+.drawer-nav{flex:1;overflow-y:auto;padding:12px;}
+.drawer-item{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;border-radius:14px;
+  cursor:pointer;transition:all 0.2s;
+  color:var(--text-2);font-weight:500;font-size:15px;
+  border:none;background:transparent;width:100%;text-align:left;
+}
+.drawer-item:hover{background:var(--emerald-mist);color:var(--emerald-deep);}
+.drawer-item.active{
+  background:linear-gradient(135deg,var(--emerald-mist),var(--sapphire-mist));
+  color:var(--emerald-deep);font-weight:700;
+}
+.drawer-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  transition:transform 0.2s;
+}
+.drawer-item:hover .drawer-icon{transform:scale(1.1);}
+.drawer-footer{
+  padding:16px 24px;border-top:1px solid var(--border-hard);
+  font-size:12px;color:var(--text-3);text-align:center;
+}
+
+/* ── PAGE WRAPPER ── */
+.page-content{
+  padding-top:var(--nav-h);
+  min-height:100vh;
+}
+.container{max-width:1200px;margin:0 auto;padding:0 20px;}
+.section{padding:32px 0;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--bg-surface);
+  border:1px solid var(--border-hard);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow 0.3s,transform 0.3s,border-color 0.3s;
+}
+.card:hover{
+  box-shadow:var(--shadow-md);
+  transform:translateY(-2px);
+  border-color:var(--border);
+}
+.card-sm{border-radius:var(--radius-md);}
+.card-glass{
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.5);
+}
+[data-theme="dark"] .card-glass{background:rgba(17,28,25,0.8);}
+
+/* ── STAT CARD ── */
+.stat-card{
+  padding:20px;cursor:default;
+}
+.stat-card .icon-wrap{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:12px;
+}
+.stat-card .stat-val{
+  font-family:'Fraunces',serif;
+  font-size:28px;font-weight:800;line-height:1;
+  margin-bottom:4px;
+}
+.stat-card .stat-label{font-size:13px;color:var(--text-3);font-weight:500;}
+.stat-card .stat-change{
+  font-size:12px;font-weight:600;margin-top:6px;
+}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 20px;border-radius:12px;font-weight:600;
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  cursor:pointer;transition:all 0.2s;border:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--emerald),var(--emerald-deep));
+  color:#fff;box-shadow:0 4px 16px rgba(0,200,150,0.3);
+}
+.btn-primary:hover{
+  box-shadow:0 8px 24px rgba(0,200,150,0.45);
+  transform:translateY(-1px);
+}
+.btn-primary:active{transform:translateY(0);}
+.btn-outline{
+  background:transparent;
+  border:2px solid var(--emerald);color:var(--emerald);
+}
+.btn-outline:hover{background:var(--emerald-mist);}
+.btn-ghost{
+  background:var(--bg-subtle);color:var(--text-2);
+}
+.btn-ghost:hover{background:var(--border-hard);}
+.btn-danger{
+  background:linear-gradient(135deg,#FF4757,#c0392b);color:#fff;
+  box-shadow:0 4px 16px rgba(255,71,87,0.35);
+}
+.btn-danger:hover{box-shadow:0 8px 24px rgba(255,71,87,0.5);transform:translateY(-1px);}
+.btn-lg{padding:14px 28px;font-size:16px;border-radius:16px;}
+.btn-xl{padding:18px 36px;font-size:18px;border-radius:18px;}
+.btn-sm{padding:6px 14px;font-size:13px;border-radius:10px;}
+.btn-icon{padding:10px;border-radius:12px;}
+.btn-full{width:100%;}
+
+/* ── INPUTS ── */
+.input,.textarea,.select{
+  width:100%;padding:12px 16px;
+  border:2px solid var(--border-hard);
+  border-radius:12px;
+  background:var(--bg-surface);
+  color:var(--text-1);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  outline:none;
+}
+.input:focus,.textarea:focus,.select:focus{
+  border-color:var(--emerald);
+  box-shadow:0 0 0 3px rgba(0,200,150,0.12);
+}
+.textarea{resize:vertical;min-height:100px;}
+.input-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.input-label{font-size:13px;font-weight:600;color:var(--text-2);}
+
+/* ── BADGES ── */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:99px;
+  font-size:12px;font-weight:700;letter-spacing:0.3px;
+}
+.badge-green{background:var(--emerald-mist);color:var(--emerald-deep);}
+.badge-blue{background:var(--sapphire-mist);color:var(--sapphire);}
+.badge-red{background:var(--coral-mist);color:var(--coral);}
+.badge-amber{background:var(--amber-mist);color:var(--amber);}
+.badge-violet{background:var(--violet-mist);color:var(--violet);}
+
+/* ── PROGRESS ── */
+.progress-wrap{background:var(--bg-subtle);border-radius:99px;overflow:hidden;}
+.progress-bar{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--emerald),var(--sapphire));
+  transition:width 1.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── SOS BUTTON ── */
+.sos-fab{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,#FF4757,#c0392b);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1px;
+  color:#fff;font-weight:900;font-size:11px;
+  font-family:'Fraunces',serif;letter-spacing:1px;
+  box-shadow:0 4px 24px rgba(255,71,87,0.6),0 0 0 0 rgba(255,71,87,0.4);
+  animation:sosPulse 2s ease infinite;
+  transition:transform 0.15s;
+}
+.sos-fab:hover{transform:scale(1.1);}
+.sos-fab:active{transform:scale(0.95);}
+.sos-fab .sos-icon{font-size:22px;line-height:1;}
+
+/* ── MARQUEE ── */
+.marquee-outer{overflow:hidden;position:relative;}
+.marquee-track{
+  display:flex;gap:16px;
+  animation:marquee 30s linear infinite;
+  width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-card{
+  flex-shrink:0;width:220px;height:160px;
+  border-radius:20px;overflow:hidden;position:relative;
+  display:flex;align-items:flex-end;padding:16px;
+  cursor:default;
+}
+
+/* ── WATER DROPS ── */
+.water-grid{display:flex;gap:6px;flex-wrap:wrap;}
+.drop{
+  font-size:28px;cursor:pointer;
+  filter:grayscale(1) opacity(0.3);
+  transition:filter 0.3s,transform 0.2s;
+  user-select:none;
+}
+.drop.filled{filter:none;}
+.drop:hover{transform:scale(1.2);}
+
+/* ── CHAT BUBBLES ── */
+.chat-wrap{display:flex;flex-direction:column;gap:12px;}
+.chat-bubble{
+  padding:12px 16px;border-radius:18px;max-width:80%;
+  font-size:14px;line-height:1.55;
+  animation:fadeSlideUp 0.3s ease both;
+}
+.chat-user{
+  background:linear-gradient(135deg,var(--emerald),var(--emerald-deep));
+  color:#fff;align-self:flex-end;
+  border-bottom-right-radius:4px;
+}
+.chat-ai{
+  background:var(--bg-subtle);color:var(--text-1);
+  align-self:flex-start;border:1px solid var(--border-hard);
+  border-bottom-left-radius:4px;
+}
+
+/* ── FIRST AID STEPS ── */
+.step-card{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px;border-radius:var(--radius-md);
+  border:1px solid var(--border-hard);
+  background:var(--bg-surface);
+  animation:fadeSlideUp 0.4s ease both;
+}
+.step-num{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  color:#fff;font-weight:800;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-family:'Fraunces',serif;
+}
+
+/* ── EMERGENCY BUTTONS ── */
+.em-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;border-radius:20px;border:none;cursor:pointer;
+  color:#fff;font-family:'Fraunces',serif;font-size:18px;font-weight:700;
+  transition:transform 0.15s,box-shadow 0.15s;
+  width:100%;text-align:left;
+  box-shadow:0 6px 24px rgba(0,0,0,0.2);
+}
+.em-btn:hover{transform:scale(1.02);box-shadow:0 10px 36px rgba(0,0,0,0.3);}
+.em-btn:active{transform:scale(0.98);}
+.em-btn .em-num{
+  font-size:28px;font-weight:900;letter-spacing:-1px;
+  opacity:0.9;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInLeft{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes sosPulse{
+  0%{box-shadow:0 4px 24px rgba(255,71,87,0.6),0 0 0 0 rgba(255,71,87,0.4)}
+  70%{box-shadow:0 4px 24px rgba(255,71,87,0.6),0 0 0 20px rgba(255,71,87,0)}
+  100%{box-shadow:0 4px 24px rgba(255,71,87,0.6),0 0 0 0 rgba(255,71,87,0)}
+}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes bounceIn{0%{transform:scale(0.5);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes celebration{0%{transform:scale(0) rotate(-10deg)}60%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+
+.animate-fade{animation:fadeSlideUp 0.5s ease both;}
+.animate-float{animation:float 3s ease infinite;}
+.animate-spin{animation:spin 1s linear infinite;}
+.animate-pulse{animation:pulse 1.5s ease infinite;}
+.animate-bounce-in{animation:bounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;}
+.animate-celebration{animation:celebration 0.6s cubic-bezier(0.34,1.56,0.64,1) both;}
+
+/* ── CHART SVG ── */
+.chart-area{overflow:visible;}
+.chart-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.chart-dot{cursor:pointer;transition:r 0.2s;}
+.chart-dot:hover{r:6;}
+
+/* ── TABS ── */
+.tab-list{
+  display:flex;gap:4px;padding:4px;
+  background:var(--bg-subtle);border-radius:14px;
+  flex-wrap:wrap;
+}
+.tab-btn{
+  padding:8px 16px;border-radius:10px;border:none;
+  background:transparent;color:var(--text-3);
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.tab-btn.active{
+  background:var(--bg-surface);color:var(--emerald-deep);
+  box-shadow:var(--shadow-sm);
+}
+.tab-btn:hover:not(.active){color:var(--text-2);background:rgba(0,200,150,0.05);}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  animation:fadeIn 0.2s ease;
+}
+.modal{
+  background:var(--bg-surface);border-radius:var(--radius-xl);
+  padding:32px;max-width:500px;width:100%;
+  box-shadow:var(--shadow-lg);
+  animation:bounceIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  max-height:90vh;overflow-y:auto;
+}
+
+/* ── TOOLTIP ── */
+.tooltip{
+  position:relative;
+}
+.tooltip-text{
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:var(--text-1);color:var(--bg-surface);
+  padding:6px 10px;border-radius:8px;font-size:12px;white-space:nowrap;
+  pointer-events:none;opacity:0;transition:opacity 0.2s;z-index:10;
+}
+.tooltip:hover .tooltip-text{opacity:1;}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border-hard);margin:20px 0;}
+
+/* ── SECTION HEADING ── */
+.section-title{
+  font-family:'Fraunces',serif;
+  font-size:28px;font-weight:800;margin-bottom:6px;
+}
+.section-sub{font-size:15px;color:var(--text-3);margin-bottom:24px;}
+
+/* ── SKELETON LOADER ── */
+.skeleton{
+  background:linear-gradient(90deg,var(--bg-subtle) 25%,var(--border-hard) 50%,var(--bg-subtle) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s ease infinite;
+  border-radius:8px;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--bg-surface);
+  border-top:1px solid var(--border-hard);
+  padding:48px 0 28px;margin-top:60px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;margin-bottom:40px;
+}
+.footer-brand-desc{font-size:14px;color:var(--text-3);line-height:1.7;margin-top:10px;}
+.footer-heading{font-weight:700;font-size:14px;margin-bottom:14px;color:var(--text-2);}
+.footer-link{
+  display:block;font-size:14px;color:var(--text-3);
+  margin-bottom:8px;cursor:pointer;transition:color 0.2s;
+}
+.footer-link:hover{color:var(--emerald);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:24px;border-top:1px solid var(--border-hard);
+  font-size:13px;color:var(--text-3);flex-wrap:wrap;gap:8px;
+}
+
+/* ── REMEDY VIDEO CARD ── */
+.video-card{cursor:pointer;overflow:hidden;}
+.video-thumb{
+  height:140px;background:var(--bg-subtle);
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;position:relative;
+  border-radius:var(--radius-md) var(--radius-md) 0 0;
+  overflow:hidden;
+}
+.play-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.3);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.2s;
+}
+.video-card:hover .play-overlay{opacity:1;}
+.play-circle{
+  width:52px;height:52px;background:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+
+/* ── VITALS ── */
+.vital-card{
+  padding:16px;border-radius:var(--radius-md);
+  border:1px solid var(--border-hard);background:var(--bg-surface);
+  transition:all 0.3s;
+}
+.vital-val{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:800;
+}
+.vital-label{font-size:12px;color:var(--text-3);font-weight:500;margin-top:2px;}
+
+/* ── CIRCULAR PROGRESS ── */
+svg.cpr{overflow:visible;}
+.cpr-track{fill:none;stroke:var(--border-hard);}
+.cpr-fill{
+  fill:none;stroke-linecap:round;
+  transition:stroke-dashoffset 1.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── PROFILE ── */
+.profile-avatar{
+  width:96px;height:96px;border-radius:28px;
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  display:flex;align-items:center;justify-content:center;
+  font-size:40px;margin:0 auto 16px;
+  box-shadow:var(--shadow-md);
+}
+.profile-stat{
+  text-align:center;padding:16px;
+  border-right:1px solid var(--border-hard);
+}
+.profile-stat:last-child{border-right:none;}
+.profile-stat-val{font-family:'Fraunces',serif;font-size:22px;font-weight:800;}
+.profile-stat-label{font-size:12px;color:var(--text-3);}
+
+/* ── WORKOUT TIMER ── */
+.timer-display{
+  font-family:'Fraunces',serif;font-size:64px;font-weight:900;
+  text-align:center;letter-spacing:-2px;
+  background:linear-gradient(135deg,var(--emerald),var(--sapphire));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── MEDICATION ROW ── */
+.med-row{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:14px;
+  border:1px solid var(--border-hard);background:var(--bg-surface);
+  transition:border-color 0.2s;
+}
+.med-row:hover{border-color:var(--emerald);}
+.med-check{
+  width:24px;height:24px;border-radius:8px;border:2px solid var(--border-hard);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;flex-shrink:0;
+}
+.med-check.checked{background:var(--emerald);border-color:var(--emerald);}
+
+/* ── HERO GRADIENT BG ── */
+.hero-bg{
+  background:linear-gradient(135deg,var(--emerald-mist) 0%,var(--sapphire-mist) 50%,var(--bg-base) 100%);
+  background-size:200% 200%;
+  animation:gradient-shift 8s ease infinite;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-title{font-size:18px;}
+  .footer-grid{grid-template-columns:1fr;gap:24px;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .timer-display{font-size:48px;}
+  .modal{padding:20px;}
+  .em-btn{padding:16px 18px;font-size:16px;}
+  .em-btn .em-num{font-size:22px;}
+}
+@media(max-width:480px){
+  .drawer{width:100%;}
+  .sos-fab{bottom:20px;right:20px;width:56px;height:56px;}
+}
+
+/* ── CUSTOM RADIO/TOGGLE ── */
+.toggle{
+  position:relative;width:48px;height:26px;
+  background:var(--border-hard);border-radius:99px;
+  cursor:pointer;transition:background 0.3s;flex-shrink:0;
+}
+.toggle.on{background:var(--emerald);}
+.toggle::after{
+  content:'';position:absolute;top:3px;left:3px;
+  width:20px;height:20px;border-radius:50%;background:#fff;
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+.toggle.on::after{transform:translateX(22px);}
+
+/* ── SEARCH BAR ── */
+.search-bar{
+  display:flex;align-items:center;gap:12px;
+  background:var(--bg-surface);
+  border:2px solid var(--border-hard);border-radius:16px;
+  padding:4px 4px 4px 16px;
+  transition:border-color 0.2s;
+}
+.search-bar:focus-within{border-color:var(--emerald);}
+.search-input{
+  flex:1;border:none;outline:none;background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text-1);
+}
+.search-btn{
+  padding:10px 18px;border-radius:12px;border:none;
+  background:var(--emerald);color:#fff;cursor:pointer;
+  font-weight:600;font-size:13px;transition:opacity 0.2s;
+}
+.search-btn:hover{opacity:0.9;}
+
+/* ── GRID UTILITIES ── */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+@media(max-width:768px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+}
+
+/* ── QUICK ACTIONS ── */
+.quick-action{
+  padding:20px 16px;border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;border:1px solid var(--border-hard);
+  background:var(--bg-surface);
+  transition:all 0.25s;
+  text-align:center;
+}
+.quick-action:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.quick-action .qa-icon{font-size:36px;transition:transform 0.25s;}
+.quick-action:hover .qa-icon{transform:scale(1.15);}
+.quick-action .qa-label{font-size:13px;font-weight:700;color:var(--text-2);}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY HELPERS
+═══════════════════════════════════════════════════════════════ */
+const formatTime = (sec) => {
+  const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+  if(h>0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+};
+const today = () => new Date().toLocaleDateString('en-IN',{weekday:'long',month:'long',day:'numeric'});
+const greet = () => {
+  const h = new Date().getHours();
+  if(h<12) return {text:'Good morning',emoji:'☀️'};
+  if(h<17) return {text:'Good afternoon',emoji:'🌤️'};
+  return {text:'Good evening',emoji:'🌙'};
+};
+const clamp = (v,min,max)=>Math.min(Math.max(v,min),max);
+
+/* ═══════════════════════════════════════════════════════════════
+   CLAUDE AI CALL
+═══════════════════════════════════════════════════════════════ */
+const callClaude = async(messages, system='') => {
+  const res = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      system,
+      messages
+    })
+  });
+  const data = await res.json();
+  return data.content?.map(b=>b.text||'').join('')||'Sorry, I could not respond right now.';
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   SVG ICONS
+═══════════════════════════════════════════════════════════════ */
+const Icon = ({name,size=20,color='currentColor',className=''})=>{
+  const icons = {
+    menu: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
+    sun: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
+    moon: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
+    x: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+    heart: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+    activity: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+    droplet: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
+    phone: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.02-1.02a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+    mapPin: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+    user: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+    check: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+    chevRight: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>,
+    search: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+    send: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>,
+    play: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><polygon points="5 3 19 12 5 21 5 3"/></svg>,
+    pause: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>,
+    refresh: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>,
+    plus: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+    upload: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>,
+    pill: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>,
+    mic: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+    award: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
+    share: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>,
+    zap: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+    settings: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+    bell: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>,
+    youtube: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>,
+    book: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+    home: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+    shield: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+    flame: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>,
+    stethoscope: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>,
+    cross: <svg width={size} height={size} viewBox="0 0 24 24" fill={color}><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/></svg>,
+    leaf: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>,
+    brain: <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-1.73-4.26A2.5 2.5 0 0 1 6.5 9.5a2.5 2.5 0 0 1 3-2.45A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 1.74-4.26A2.5 2.5 0 0 0 17.5 9.5a2.5 2.5 0 0 0-3-2.45A2.5 2.5 0 0 0 14.5 2z"/></svg>,
+  };
+  return <span className={className} style={{display:'inline-flex',alignItems:'center'}}>{icons[name]||null}</span>;
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   CIRCULAR PROGRESS RING
+═══════════════════════════════════════════════════════════════ */
+const CircularProgress = ({pct=0,size=80,stroke=8,color='#00C896',label='',val=''})=>{
+  const r = (size-stroke*2)/2;
+  const circ = 2*Math.PI*r;
+  const offset = circ - (clamp(pct,0,100)/100)*circ;
+  return(
+    <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+      <svg width={size} height={size} className="cpr">
+        <circle className="cpr-track" cx={size/2} cy={size/2} r={r} strokeWidth={stroke}/>
+        <circle className="cpr-fill" cx={size/2} cy={size/2} r={r}
+          stroke={color} strokeWidth={stroke}
+          strokeDasharray={circ} strokeDashoffset={offset}
+          transform={`rotate(-90 ${size/2} ${size/2})`}/>
+        <text x={size/2} y={size/2+1} textAnchor="middle" dominantBaseline="middle"
+          style={{fill:'var(--text-1)',fontFamily:'Fraunces,serif',fontSize:size*0.2,fontWeight:800}}>
+          {val||`${Math.round(pct)}%`}
+        </text>
+      </svg>
+      {label && <div style={{fontSize:11,color:'var(--text-3)',fontWeight:600,textTransform:'uppercase',letterSpacing:0.5}}>{label}</div>}
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   MINI LINE CHART (pure SVG)
+═══════════════════════════════════════════════════════════════ */
+const MiniChart = ({data=[],color='#00C896',height=60,fill=true})=>{
+  if(!data.length) return null;
+  const W=280,H=height,pad=8;
+  const min=Math.min(...data),max=Math.max(...data),range=max-min||1;
+  const pts=data.map((v,i)=>{
+    const x=pad+(i/(data.length-1))*(W-pad*2);
+    const y=pad+(1-(v-min)/range)*(H-pad*2);
+    return [x,y];
+  });
+  const pathD=pts.map((p,i)=>`${i===0?'M':'L'}${p[0]},${p[1]}`).join(' ');
+  const areaD=`${pathD} L${pts[pts.length-1][0]},${H-pad} L${pts[0][0]},${H-pad} Z`;
+  const id=`grad_${color.replace('#','')}`;
+  return(
+    <svg viewBox={`0 0 ${W} ${H}`} style={{width:'100%',height:H,overflow:'visible'}}>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.25"/>
+          <stop offset="100%" stopColor={color} stopOpacity="0"/>
+        </linearGradient>
+      </defs>
+      {fill&&<path d={areaD} fill={`url(#${id})`}/>}
+      <path d={pathD} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {pts.map((p,i)=>(
+        <circle key={i} cx={p[0]} cy={p[1]} r={4} fill={color} className="chart-dot"
+          stroke="var(--bg-surface)" strokeWidth="2"/>
+      ))}
+    </svg>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   CELEBRATION BADGE OVERLAY
+═══════════════════════════════════════════════════════════════ */
+const CelebrationBadge = ({show,title='Goal Achieved!',sub='',onClose})=>{
+  if(!show) return null;
+  return(
+    <div className="modal-bg" onClick={onClose}>
+      <div style={{textAlign:'center',animation:'bounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1)'}}>
+        <div style={{fontSize:80,marginBottom:16,animation:'float 2s ease infinite'}}>🏆</div>
+        <div style={{
+          background:'linear-gradient(135deg,#FFD700,#FFA500)',
+          borderRadius:24,padding:'28px 40px',
+          boxShadow:'0 20px 60px rgba(255,165,0,0.4)'
+        }}>
+          <div style={{fontSize:28,fontFamily:'Fraunces,serif',fontWeight:900,color:'#fff',marginBottom:6}}>{title}</div>
+          {sub&&<div style={{color:'rgba(255,255,255,0.85)',fontSize:15}}>{sub}</div>}
+          <div style={{marginTop:16,fontSize:32}}>🎉 ⭐ 🎊</div>
+        </div>
+        <p style={{color:'rgba(255,255,255,0.7)',marginTop:16,fontSize:14}}>Tap anywhere to close</p>
+      </div>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   SOS MODAL
+═══════════════════════════════════════════════════════════════ */
+const SOSModal = ({onClose})=>(
+  <div className="modal-bg">
+    <div className="modal" style={{maxWidth:400}}>
+      <div style={{textAlign:'center',marginBottom:24}}>
+        <div style={{fontSize:56,marginBottom:8}}>🆘</div>
+        <h2 style={{fontFamily:'Fraunces,serif',fontSize:26,marginBottom:4}}>Emergency SOS</h2>
+        <p style={{color:'var(--text-3)',fontSize:13}}>Select emergency service to call immediately</p>
+      </div>
+      <div style={{display:'flex',flexDirection:'column',gap:10,marginBottom:16}}>
+        {[
+          {label:'🚑 Ambulance',num:'102',bg:'linear-gradient(135deg,#FF4757,#c0392b)'},
+          {label:'🚓 Police',num:'100',bg:'linear-gradient(135deg,#0EA5E9,#0369a1)'},
+          {label:'🚒 Fire Brigade',num:'101',bg:'linear-gradient(135deg,#F59E0B,#d97706)'},
+          {label:'📞 National Emergency',num:'112',bg:'linear-gradient(135deg,#7C3AED,#5b21b6)'},
+        ].map(e=>(
+          <button key={e.num} className="em-btn" style={{background:e.bg}}
+            onClick={()=>window.open(`tel:${e.num}`)}>
+            <span>{e.label}</span>
+            <span className="em-num">{e.num}</span>
+          </button>
+        ))}
+      </div>
+      <button className="btn btn-ghost btn-full" onClick={onClose}>Cancel</button>
+    </div>
+  </div>
+);
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════════════════ */
+const Navbar = ({dark,onToggleDark,onOpenDrawer,onHome})=>(
+  <nav className="navbar">
+    <div className="navbar-inner">
+      <button className="nav-btn" onClick={onOpenDrawer} aria-label="Menu">
+        <Icon name="menu" size={20}/>
+      </button>
+      <div className="nav-brand" onClick={onHome}>
+        <div className="nav-logo">💚</div>
+        <span className="nav-title">SwasthayaLink</span>
+      </div>
+      <div className="nav-actions">
+        <button className="nav-btn" onClick={onToggleDark} aria-label="Toggle theme">
+          <Icon name={dark?'sun':'moon'} size={18}/>
+        </button>
+      </div>
+    </div>
+  </nav>
+);
+
+/* ═══════════════════════════════════════════════════════════════
+   DRAWER
+═══════════════════════════════════════════════════════════════ */
+const NAV_ITEMS = [
+  {id:'home',    icon:'home',  label:'Home',           color:'#00C896', bg:'#E6FAF4'},
+  {id:'health',  icon:'heart', label:'Health',          color:'#FF4757', bg:'#FFF0F1'},
+  {id:'symptom', icon:'stethoscope',label:'Symptom Checker',color:'#0EA5E9',bg:'#E0F4FF'},
+  {id:'firstaid',icon:'cross', label:'First Aid',       color:'#F59E0B', bg:'#FFF8E7'},
+  {id:'remedies',icon:'leaf',  label:'Remedies',        color:'#10B981', bg:'#ECFDF5'},
+  {id:'emergency',icon:'shield',label:'Emergency',      color:'#7C3AED', bg:'#F5F0FF'},
+  {id:'profile', icon:'user',  label:'Profile',         color:'#6B7280', bg:'#F3F4F6'},
+];
+
+const Drawer = ({active,onSelect,onClose})=>(
+  <>
+    <div className="drawer-overlay" onClick={onClose}/>
+    <div className="drawer">
+      <div className="drawer-header">
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+          <div>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:22,fontWeight:800,color:'var(--text-1)'}}>SwasthayaLink</div>
+            <div style={{fontSize:12,color:'var(--text-3)'}}>Your complete health companion</div>
+          </div>
+          <button className="nav-btn" onClick={onClose}><Icon name="x" size={18}/></button>
+        </div>
+      </div>
+      <div className="drawer-nav">
+        {NAV_ITEMS.map(item=>(
+          <button key={item.id} className={`drawer-item${active===item.id?' active':''}`}
+            onClick={()=>{onSelect(item.id);onClose();}}>
+            <div className="drawer-icon" style={{background:item.bg}}>
+              <Icon name={item.icon} size={18} color={item.color}/>
+            </div>
+            {item.label}
+            {active===item.id&&<Icon name="chevRight" size={16} color="var(--emerald)"/>}
+          </button>
+        ))}
+      </div>
+      <div className="drawer-footer">
+        <div>SwasthayaLink v2.0</div>
+        <div style={{marginTop:4}}>Built for better health outcomes 💚</div>
+      </div>
+    </div>
+  </>
+);
+
+/* ═══════════════════════════════════════════════════════════════
+   ██╗  ██╗ ██████╗ ███╗   ███╗███████╗
+   ██║  ██║██╔═══██╗████╗ ████║██╔════╝
+   ███████║██║   ██║██╔████╔██║█████╗
+   ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝
+   ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗
+═══════════════════════════════════════════════════════════════ */
+const HomePage = ({onNav})=>{
+  const g = greet();
+  const marqueeData = [
+    {emoji:'🧘',bg:'linear-gradient(135deg,#E6FAF4,#A7F3D0)',title:'Mind & Body',sub:'Holistic wellness'},
+    {emoji:'💊',bg:'linear-gradient(135deg,#E0F4FF,#BAE6FD)',title:'Smart Meds',sub:'Never miss a dose'},
+    {emoji:'🏃',bg:'linear-gradient(135deg,#FFF8E7,#FDE68A)',title:'Stay Active',sub:'Track every step'},
+    {emoji:'🩺',bg:'linear-gradient(135deg,#F5F0FF,#DDD6FE)',title:'AI Diagnosis',sub:'Smart symptom check'},
+    {emoji:'🌿',bg:'linear-gradient(135deg,#ECFDF5,#A7F3D0)',title:'Remedies',sub:'Natural healing'},
+  ];
+  const stats = [
+    {icon:'activity',label:'Steps',val:'8,420',change:'+12%',color:'#0EA5E9',bg:'#E0F4FF',progress:84},
+    {icon:'flame',label:'Calories',val:'1,840',change:'+5%',color:'#F59E0B',bg:'#FFF8E7',progress:61},
+    {icon:'heart',label:'Heart Rate',val:'72 bpm',change:'Normal',color:'#FF4757',bg:'#FFF0F1',progress:72},
+    {icon:'droplet',label:'Hydration',val:'1.8 L',change:'2L goal',color:'#00C896',bg:'#E6FAF4',progress:90},
+  ];
+  return(
+    <div style={{paddingBottom:80}}>
+      {/* HERO */}
+      <div className="hero-bg" style={{padding:'48px 0 40px'}}>
+        <div className="container">
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:16}}>
+            <div className="animate-fade">
+              <div style={{fontSize:14,color:'var(--text-3)',fontWeight:500,marginBottom:4}}>{today()}</div>
+              <h1 style={{fontSize:'clamp(28px,5vw,44px)',fontWeight:900,marginBottom:8}}>
+                {g.emoji} {g.text}, Aryan
+              </h1>
+              <p style={{color:'var(--text-3)',fontSize:16,maxWidth:400}}>
+                Your health is looking great today. Keep up the amazing work!
+              </p>
+              <div style={{display:'flex',gap:8,marginTop:16,flexWrap:'wrap'}}>
+                <button className="btn btn-primary btn-lg" onClick={()=>onNav('health')}>
+                  <Icon name="activity" size={16}/> Health Dashboard
+                </button>
+                <button className="btn btn-outline btn-lg" onClick={()=>onNav('symptom')}>
+                  <Icon name="stethoscope" size={16}/> Check Symptoms
+                </button>
+              </div>
+            </div>
+            <div className="animate-float" style={{textAlign:'center'}}>
+              <div style={{fontSize:100,lineHeight:1}}>🫀</div>
+              <div style={{marginTop:8}}>
+                <span className="badge badge-green">● Live Monitoring</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* STATS */}
+      <div className="container section" style={{paddingTop:24}}>
+        <div className="grid-4">
+          {stats.map((s,i)=>(
+            <div key={s.label} className="card stat-card" style={{animationDelay:`${i*0.08}s`}} onClick={()=>onNav('health')}>
+              <div className="icon-wrap" style={{background:s.bg}}>
+                <Icon name={s.icon} size={22} color={s.color}/>
+              </div>
+              <div className="stat-val">{s.val}</div>
+              <div className="stat-label">{s.label}</div>
+              <div className="stat-change" style={{color:s.color}}>{s.change}</div>
+              <div className="progress-wrap" style={{height:6,marginTop:10}}>
+                <div className="progress-bar" style={{width:`${s.progress}%`}}/>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* MARQUEE */}
+      <div style={{marginBottom:40,padding:'0 0 8px'}}>
+        <div className="container" style={{marginBottom:12}}>
+          <h2 className="section-title">Explore SwasthayaLink</h2>
+        </div>
+        <div className="marquee-outer" style={{padding:'8px 0'}}>
+          <div className="marquee-track">
+            {[...marqueeData,...marqueeData].map((m,i)=>(
+              <div key={i} className="marquee-card" style={{background:m.bg,flexDirection:'column',gap:4}}>
+                <div style={{position:'absolute',top:12,right:12,fontSize:48}}>{m.emoji}</div>
+                <div style={{fontFamily:'Fraunces,serif',fontSize:18,fontWeight:800,color:'var(--text-2)'}}>{m.title}</div>
+                <div style={{fontSize:13,color:'var(--text-3)'}}>{m.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* QUICK ACTIONS */}
+      <div className="container">
+        <h2 className="section-title">Quick Actions</h2>
+        <p className="section-sub">Everything you need, one tap away</p>
+        <div className="grid-4" style={{gap:12}}>
+          {[
+            {id:'health',emoji:'❤️',label:'Health Hub',color:'#FFF0F1'},
+            {id:'symptom',emoji:'🩺',label:'Check Symptoms',color:'#E0F4FF'},
+            {id:'firstaid',emoji:'🚑',label:'First Aid',color:'#FFF8E7'},
+            {id:'remedies',emoji:'🌿',label:'Remedies',color:'#ECFDF5'},
+            {id:'emergency',emoji:'🆘',label:'Emergency',color:'#FFF0F1'},
+            {id:'profile',emoji:'👤',label:'My Profile',color:'#F5F0FF'},
+            {id:'health',emoji:'💊',label:'Medications',color:'#F0FFF4'},
+            {id:'health',emoji:'📊',label:'Vitals',color:'#E0F4FF'},
+          ].map((a,i)=>(
+            <div key={i} className="quick-action" style={{background:a.color}}
+              onClick={()=>onNav(a.id)}>
+              <div className="qa-icon">{a.emoji}</div>
+              <div className="qa-label">{a.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ABOUT US */}
+      <div className="container" style={{marginTop:60}}>
+        <div style={{
+          background:'linear-gradient(135deg,var(--emerald-mist),var(--sapphire-mist))',
+          borderRadius:28,padding:'48px',position:'relative',overflow:'hidden'
+        }}>
+          <div style={{position:'absolute',right:-20,top:-20,fontSize:160,opacity:0.08}}>💚</div>
+          <div style={{maxWidth:600,position:'relative',zIndex:1}}>
+            <span className="badge badge-green" style={{marginBottom:12}}>About Us</span>
+            <h2 style={{fontFamily:'Fraunces,serif',fontSize:'clamp(26px,4vw,38px)',fontWeight:900,marginBottom:16}}>
+              Your Trusted Health Companion
+            </h2>
+            <p style={{color:'var(--text-2)',fontSize:16,lineHeight:1.8,marginBottom:24}}>
+              SwasthayaLink is India's most comprehensive digital healthcare platform, combining AI-powered symptom checking, 
+              real-time health tracking, emergency response, and natural remedies — all in one beautifully designed experience.
+            </p>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))',gap:12}}>
+              {[
+                {icon:'brain',text:'AI Symptom Checker'},
+                {icon:'activity',text:'Health Tracking'},
+                {icon:'cross',text:'First Aid Guides'},
+                {icon:'leaf',text:'Natural Remedies'},
+                {icon:'shield',text:'Emergency SOS'},
+                {icon:'pill',text:'Medication Reminders'},
+              ].map(f=>(
+                <div key={f.text} style={{
+                  display:'flex',alignItems:'center',gap:8,
+                  background:'rgba(255,255,255,0.7)',backdropFilter:'blur(10px)',
+                  borderRadius:12,padding:'10px 14px',
+                  border:'1px solid rgba(255,255,255,0.5)'
+                }}>
+                  <Icon name={f.icon} size={16} color="var(--emerald-deep)"/>
+                  <span style={{fontSize:13,fontWeight:600,color:'var(--text-2)'}}>{f.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CONTACT */}
+      <div className="container" style={{marginTop:40}}>
+        <h2 className="section-title">Get In Touch</h2>
+        <p className="section-sub">Questions, feedback or partnership? We'd love to hear from you.</p>
+        <div className="grid-2" style={{gap:32}}>
+          <div className="card" style={{padding:28}}>
+            <div className="input-group">
+              <label className="input-label">Full Name</label>
+              <input className="input" placeholder="Your name"/>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Email Address</label>
+              <input className="input" type="email" placeholder="your@email.com"/>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Phone Number</label>
+              <input className="input" type="tel" placeholder="+91 98765 43210"/>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Message</label>
+              <textarea className="textarea" placeholder="Tell us how we can help..."/>
+            </div>
+            <button className="btn btn-primary btn-full btn-lg">
+              <Icon name="send" size={16}/> Send Message
+            </button>
+          </div>
+          <div style={{display:'flex',flexDirection:'column',gap:16}}>
+            {[
+              {icon:'phone',label:'Call Us',val:'+91 1800-SWASTH-1',color:'#00C896'},
+              {icon:'mapPin',label:'Head Office',val:'Sector 21, Gurgaon, Haryana 122016',color:'#0EA5E9'},
+              {icon:'bell',label:'Support Hours',val:'Mon–Sat, 9AM–8PM IST',color:'#F59E0B'},
+              {icon:'heart',label:'Emergency Line',val:'Available 24/7 — Call 112',color:'#FF4757'},
+            ].map(c=>(
+              <div key={c.label} className="card" style={{padding:'18px 20px',display:'flex',alignItems:'center',gap:14}}>
+                <div style={{
+                  width:44,height:44,borderRadius:14,
+                  background:`${c.color}18`,
+                  display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0
+                }}>
+                  <Icon name={c.icon} size={20} color={c.color}/>
+                </div>
+                <div>
+                  <div style={{fontSize:12,color:'var(--text-3)',fontWeight:600,marginBottom:2}}>{c.label}</div>
+                  <div style={{fontSize:14,fontWeight:700,color:'var(--text-1)'}}>{c.val}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div>
+              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
+                <div className="nav-logo">💚</div>
+                <span style={{fontFamily:'Fraunces,serif',fontSize:20,fontWeight:800,color:'var(--text-1)'}}>SwasthayaLink</span>
+              </div>
+              <p className="footer-brand-desc">
+                India's most comprehensive digital health companion. Empowering 10 million+ users to live healthier lives with AI-powered insights and real-time monitoring.
+              </p>
+              <div style={{display:'flex',gap:8,marginTop:16}}>
+                {['🐦','📘','📸','▶️'].map((s,i)=>(
+                  <div key={i} style={{
+                    width:36,height:36,borderRadius:10,background:'var(--bg-subtle)',
+                    display:'flex',alignItems:'center',justifyContent:'center',
+                    cursor:'pointer',fontSize:18,transition:'background 0.2s'
+                  }}>{s}</div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="footer-heading">Features</div>
+              {['Health Tracking','Symptom Checker','First Aid','Remedies','Emergency SOS','Medications'].map(l=>(
+                <span key={l} className="footer-link">{l}</span>
+              ))}
+            </div>
+            <div>
+              <div className="footer-heading">Company</div>
+              {['About Us','Careers','Press Kit','Blog','Partners','Contact'].map(l=>(
+                <span key={l} className="footer-link">{l}</span>
+              ))}
+            </div>
+            <div>
+              <div className="footer-heading">Legal</div>
+              {['Privacy Policy','Terms of Service','Cookie Policy','HIPAA Compliance','Data Security','Disclaimer'].map(l=>(
+                <span key={l} className="footer-link">{l}</span>
+              ))}
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <div>© 2025 SwasthayaLink Technologies Pvt. Ltd. All rights reserved.</div>
+            <div style={{display:'flex',gap:16,alignItems:'center'}}>
+              <span>🇮🇳 Made in India</span>
+              <span>•</span>
+              <span>ISO 27001 Certified</span>
+              <span>•</span>
+              <span>HIPAA Compliant</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   HEALTH TAB
+═══════════════════════════════════════════════════════════════ */
+const HealthTab = ()=>{
+  const [tab,setTab] = useState('overview');
+  const [weight,setWeight] = useState(72.5);
+  const [weightHistory] = useState([68,70,71,72,71.5,72.5,72.5]);
+  const [waterCups,setWaterCups] = useState(5);
+  const [workoutState,setWorkoutState] = useState('idle'); // idle|running|paused
+  const [workoutSec,setWorkoutSec] = useState(0);
+  const [workoutType,setWorkoutType] = useState('Running');
+  const [meds,setMeds] = useState([
+    {id:1,name:'Vitamin D3',dose:'1000 IU',time:'Morning',taken:true,icon:'☀️'},
+    {id:2,name:'Omega-3',dose:'500mg',time:'Evening',taken:false,icon:'🐟'},
+    {id:3,name:'Magnesium',dose:'200mg',time:'Night',taken:false,icon:'💊'},
+    {id:4,name:'Ashwagandha',dose:'300mg',time:'Morning',taken:true,icon:'🌿'},
+  ]);
+  const [celebrate,setCelebrate] = useState(false);
+  const [celebrateMsg,setCelebrateMsg] = useState('');
+  const [steps] = useState(8420);
+  const [calories] = useState(1840);
+  const [mindfulness,setMindfulness] = useState('');
+  const timerRef = useRef();
+
+  useEffect(()=>{
+    if(workoutState==='running'){
+      timerRef.current = setInterval(()=>setWorkoutSec(s=>s+1),1000);
+    } else clearInterval(timerRef.current);
+    return ()=>clearInterval(timerRef.current);
+  },[workoutState]);
+
+  const startWorkout=()=>{setWorkoutState('running');setWorkoutSec(0);};
+  const pauseWorkout=()=>setWorkoutState('paused');
+  const resumeWorkout=()=>setWorkoutState('running');
+  const stopWorkout=()=>{
+    setWorkoutState('idle');
+    setCelebrateMsg(`🏋️ ${workoutType} workout — ${formatTime(workoutSec)} completed!`);
+    setCelebrate(true);
+  };
+
+  const addWater=()=>{
+    if(waterCups<8){
+      const next=waterCups+1;
+      setWaterCups(next);
+      if(next===8){setCelebrateMsg('💧 Daily hydration goal achieved! 8 cups of water!');setCelebrate(true);}
+    }
+  };
+
+  const toggleMed=(id)=>{
+    const allDone = meds.map(m=>m.id===id?{...m,taken:!m.taken}:m).every(m=>m.taken);
+    setMeds(prev=>prev.map(m=>m.id===id?{...m,taken:!m.taken}:m));
+    if(allDone){setCelebrateMsg('💊 All medications taken for today! Great discipline!');setCelebrate(true);}
+  };
+
+  const weightBMI=(weight/((1.75)**2)).toFixed(1);
+
+  const tabs2=[
+    {id:'overview',label:'Overview'},
+    {id:'weight',label:'Weight'},
+    {id:'activity',label:'Activity'},
+    {id:'water',label:'Hydration'},
+    {id:'workout',label:'Workout'},
+    {id:'vitals',label:'Vitals'},
+    {id:'meds',label:'Medications'},
+    {id:'nutrition',label:'Nutrition'},
+    {id:'records',label:'Records'},
+  ];
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <CelebrationBadge show={celebrate} title="Goal Achieved!" sub={celebrateMsg} onClose={()=>setCelebrate(false)}/>
+
+      <div style={{marginBottom:20}}>
+        <h1 className="section-title">Health Dashboard</h1>
+        <p className="section-sub">Track, monitor and improve your wellbeing</p>
+      </div>
+
+      <div className="tab-list" style={{marginBottom:24}}>
+        {tabs2.map(t=>(
+          <button key={t.id} className={`tab-btn${tab===t.id?' active':''}`} onClick={()=>setTab(t.id)}>{t.label}</button>
+        ))}
+      </div>
+
+      {/* OVERVIEW */}
+      {tab==='overview'&&(
+        <div>
+          <div className="grid-4" style={{marginBottom:20}}>
+            {[
+              {icon:'activity',label:'Steps',val:steps.toLocaleString(),color:'#0EA5E9',bg:'#E0F4FF',pct:84,unit:'/10K'},
+              {icon:'flame',label:'Calories',val:'1,840',color:'#F59E0B',bg:'#FFF8E7',pct:61,unit:'kcal'},
+              {icon:'heart',label:'Heart Rate',val:'72',color:'#FF4757',bg:'#FFF0F1',pct:72,unit:'bpm'},
+              {icon:'droplet',label:'Hydration',val:`${waterCups}/8`,color:'#00C896',bg:'#E6FAF4',pct:(waterCups/8)*100,unit:'cups'},
+            ].map(s=>(
+              <div key={s.label} className="card stat-card" onClick={()=>setTab(s.label==='Steps'||s.label==='Calories'?'activity':s.label==='Hydration'?'water':'vitals')}>
+                <div className="icon-wrap" style={{background:s.bg}}>
+                  <Icon name={s.icon} size={20} color={s.color}/>
+                </div>
+                <div className="stat-val">{s.val}<span style={{fontSize:14,fontWeight:500,color:'var(--text-3)'}}>{s.unit}</span></div>
+                <div className="stat-label">{s.label}</div>
+                <div className="progress-wrap" style={{height:6,marginTop:10}}>
+                  <div className="progress-bar" style={{width:`${s.pct}%`,background:`linear-gradient(90deg,${s.color},${s.color}aa)`}}/>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="card" style={{padding:24}}>
+            <div style={{marginBottom:12,fontWeight:700,fontSize:16}}>Weight Trend (7 Days)</div>
+            <MiniChart data={weightHistory} color="#00C896" height={80}/>
+            <div style={{display:'flex',gap:24,marginTop:12}}>
+              <div><div style={{fontSize:12,color:'var(--text-3)'}}>Current</div><div style={{fontSize:18,fontWeight:800}}>{weight} kg</div></div>
+              <div><div style={{fontSize:12,color:'var(--text-3)'}}>BMI</div><div style={{fontSize:18,fontWeight:800}}>{weightBMI}</div></div>
+              <div><div style={{fontSize:12,color:'var(--text-3)'}}>Goal</div><div style={{fontSize:18,fontWeight:800}}>70 kg</div></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* WEIGHT */}
+      {tab==='weight'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="card" style={{padding:24}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+              <h3 style={{fontFamily:'Fraunces,serif',fontSize:20}}>Weight Tracking</h3>
+              <span className="badge badge-green">BMI: {weightBMI} Normal</span>
+            </div>
+            <div style={{display:'flex',gap:24,alignItems:'center',marginBottom:20}}>
+              <CircularProgress pct={((weight-60)/(100-60))*100} size={100} color="#00C896" val={`${weight}kg`} label="Current"/>
+              <div style={{flex:1}}>
+                <div style={{marginBottom:8,fontSize:14,color:'var(--text-3)'}}>Adjust today's weight</div>
+                <input type="range" min={40} max={150} step={0.1} value={weight}
+                  onChange={e=>{setWeight(parseFloat(e.target.value));}}
+                  style={{width:'100%',accentColor:'var(--emerald)',cursor:'pointer'}}/>
+                <div style={{display:'flex',justifyContent:'space-between',fontSize:12,color:'var(--text-4)'}}>
+                  <span>40 kg</span><span>150 kg</span>
+                </div>
+              </div>
+            </div>
+            <div style={{fontWeight:600,marginBottom:8,color:'var(--text-2)'}}>7-Day Trend</div>
+            <MiniChart data={weightHistory} color="#00C896" height={80}/>
+          </div>
+          <div className="grid-3">
+            {[
+              {label:'Start Weight',val:'76 kg',icon:'📅'},
+              {label:'Lost So Far',val:'3.5 kg',icon:'📉'},
+              {label:'Goal',val:'70 kg',icon:'🎯'},
+            ].map(s=>(
+              <div key={s.label} className="card" style={{padding:20,textAlign:'center'}}>
+                <div style={{fontSize:32,marginBottom:8}}>{s.icon}</div>
+                <div style={{fontFamily:'Fraunces,serif',fontSize:22,fontWeight:800}}>{s.val}</div>
+                <div style={{fontSize:12,color:'var(--text-3)'}}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ACTIVITY */}
+      {tab==='activity'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="grid-2">
+            <div className="card" style={{padding:24}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:16}}>
+                <div>
+                  <div style={{fontSize:12,color:'var(--text-3)',marginBottom:4}}>TODAY'S STEPS</div>
+                  <div style={{fontFamily:'Fraunces,serif',fontSize:40,fontWeight:900,color:'#0EA5E9'}}>{steps.toLocaleString()}</div>
+                  <div style={{fontSize:13,color:'var(--text-3)'}}>Goal: 10,000 steps</div>
+                </div>
+                <CircularProgress pct={(steps/10000)*100} size={72} color="#0EA5E9" stroke={7}/>
+              </div>
+              <MiniChart data={[4200,6800,8100,7400,9200,8420,8420]} color="#0EA5E9" height={60}/>
+            </div>
+            <div className="card" style={{padding:24}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:16}}>
+                <div>
+                  <div style={{fontSize:12,color:'var(--text-3)',marginBottom:4}}>CALORIES BURNED</div>
+                  <div style={{fontFamily:'Fraunces,serif',fontSize:40,fontWeight:900,color:'#F59E0B'}}>{calories.toLocaleString()}</div>
+                  <div style={{fontSize:13,color:'var(--text-3)'}}>Goal: 3,000 kcal</div>
+                </div>
+                <CircularProgress pct={(calories/3000)*100} size={72} color="#F59E0B" stroke={7}/>
+              </div>
+              <MiniChart data={[1200,1600,1900,1700,2100,1840,1840]} color="#F59E0B" height={60}/>
+            </div>
+          </div>
+          <div className="card" style={{padding:24}}>
+            <h3 style={{fontFamily:'Fraunces,serif',fontSize:18,marginBottom:16}}>Weekly Activity Overview</h3>
+            <div style={{display:'flex',gap:8,alignItems:'flex-end',height:100}}>
+              {['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((d,i)=>{
+                const vals=[62,80,75,45,90,70,84];
+                return(
+                  <div key={d} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+                    <div style={{
+                      width:'100%',borderRadius:8,
+                      background:i===6?'linear-gradient(135deg,var(--emerald),var(--sapphire))':'var(--bg-subtle)',
+                      height:`${vals[i]}%`,transition:'height 0.8s cubic-bezier(0.34,1.56,0.64,1)'
+                    }}/>
+                    <div style={{fontSize:10,color:'var(--text-3)',fontWeight:600}}>{d}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* HYDRATION */}
+      {tab==='water'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="card" style={{padding:32,textAlign:'center'}}>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:22,fontWeight:800,marginBottom:8}}>Daily Water Intake</div>
+            <div style={{fontSize:48,fontWeight:900,color:'#0EA5E9',marginBottom:4}}>{waterCups}/8</div>
+            <div style={{fontSize:14,color:'var(--text-3)',marginBottom:24}}>cups ({(waterCups*250/1000).toFixed(1)}L / 2.0L goal)</div>
+            <div className="progress-wrap" style={{height:14,marginBottom:28,borderRadius:99,overflow:'hidden'}}>
+              <div className="progress-bar" style={{width:`${(waterCups/8)*100}%`,background:'linear-gradient(90deg,#38BDF8,#0EA5E9)'}}/>
+            </div>
+            <div className="water-grid" style={{justifyContent:'center',marginBottom:24}}>
+              {Array.from({length:8},(_, i)=>(
+                <span key={i} className={`drop${i<waterCups?' filled':''}`} onClick={()=>setWaterCups(i+1)}>💧</span>
+              ))}
+            </div>
+            <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+              <button className="btn btn-primary btn-lg" onClick={addWater} disabled={waterCups>=8}>
+                <Icon name="plus" size={16}/> Add Cup
+              </button>
+              <button className="btn btn-ghost btn-lg" onClick={()=>setWaterCups(Math.max(0,waterCups-1))}>
+                Remove
+              </button>
+            </div>
+          </div>
+          <div className="card" style={{padding:20}}>
+            <div style={{fontWeight:700,marginBottom:12}}>Hydration Tips</div>
+            {['Drink a glass of water when you wake up','Keep a water bottle at your desk','Drink before meals for better digestion','Herbal teas count toward daily intake!'].map((t,i)=>(
+              <div key={i} style={{display:'flex',gap:10,padding:'8px 0',borderBottom:i<3?'1px solid var(--border-hard)':'none'}}>
+                <span style={{color:'var(--emerald)',flexShrink:0}}>💡</span>
+                <span style={{fontSize:14,color:'var(--text-2)'}}>{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* WORKOUT */}
+      {tab==='workout'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="card" style={{padding:32,textAlign:'center'}}>
+            <div style={{marginBottom:20}}>
+              <select className="select" style={{maxWidth:200}}
+                value={workoutType} onChange={e=>setWorkoutType(e.target.value)}>
+                {['Running','Cycling','Swimming','Yoga','Weight Training','HIIT','Walking','Boxing'].map(t=>(
+                  <option key={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div className="timer-display">{formatTime(workoutSec)}</div>
+            <div style={{fontSize:14,color:'var(--text-3)',marginBottom:28,marginTop:4}}>
+              {workoutState==='idle'?'Ready to start':workoutState==='running'?'Workout in progress...':'Paused — press resume'}
+            </div>
+            <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+              {workoutState==='idle'&&(
+                <button className="btn btn-primary btn-xl" onClick={startWorkout}>
+                  <Icon name="play" size={20}/> Start Workout
+                </button>
+              )}
+              {workoutState==='running'&&(<>
+                <button className="btn btn-ghost btn-lg" onClick={pauseWorkout}>
+                  <Icon name="pause" size={16}/> Pause
+                </button>
+                <button className="btn btn-danger btn-lg" onClick={stopWorkout}>
+                  Finish & Save
+                </button>
+              </>)}
+              {workoutState==='paused'&&(<>
+                <button className="btn btn-primary btn-lg" onClick={resumeWorkout}>
+                  <Icon name="play" size={16}/> Resume
+                </button>
+                <button className="btn btn-danger btn-lg" onClick={stopWorkout}>
+                  Finish & Save
+                </button>
+              </>)}
+            </div>
+            {workoutState!=='idle'&&(
+              <div style={{display:'flex',gap:24,justifyContent:'center',marginTop:24}}>
+                {[
+                  {label:'Est. Calories',val:Math.round(workoutSec/60*8)},
+                  {label:'Distance',val:`${(workoutSec/3600*8).toFixed(2)} km`},
+                  {label:'Active Time',val:formatTime(workoutSec)},
+                ].map(s=>(
+                  <div key={s.label} style={{textAlign:'center'}}>
+                    <div style={{fontFamily:'Fraunces,serif',fontSize:20,fontWeight:800}}>{s.val}</div>
+                    <div style={{fontSize:11,color:'var(--text-3)'}}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {/* Mindfulness */}
+          <div className="card" style={{padding:24}}>
+            <h3 style={{fontFamily:'Fraunces,serif',fontSize:18,marginBottom:16}}>🧘 Mindfulness & Recovery</h3>
+            <div className="grid-3" style={{marginBottom:16}}>
+              {[
+                {icon:'🧘',label:'Meditation',sub:'5–20 min guided'},
+                {icon:'🌬️',label:'Breathing',sub:'4-7-8 technique'},
+                {icon:'😴',label:'Sleep Hygiene',sub:'Wind-down routines'},
+              ].map(m=>(
+                <button key={m.label} className="card" style={{padding:16,textAlign:'center',border:'none',cursor:'pointer',background: mindfulness===m.label?'var(--emerald-mist)':undefined, borderColor:mindfulness===m.label?'var(--emerald)':undefined}}
+                  onClick={()=>setMindfulness(mindfulness===m.label?'':m.label)}>
+                  <div style={{fontSize:32,marginBottom:6}}>{m.icon}</div>
+                  <div style={{fontWeight:700,fontSize:13}}>{m.label}</div>
+                  <div style={{fontSize:11,color:'var(--text-3)'}}>{m.sub}</div>
+                </button>
+              ))}
+            </div>
+            {mindfulness==='Breathing'&&(
+              <div style={{background:'var(--sapphire-mist)',borderRadius:16,padding:20,textAlign:'center'}}>
+                <div style={{fontSize:40,animation:'float 4s ease infinite'}}>🌬️</div>
+                <div style={{fontFamily:'Fraunces,serif',fontSize:18,fontWeight:800,marginTop:8}}>4-7-8 Breathing</div>
+                <p style={{color:'var(--text-3)',marginTop:6,fontSize:13}}>Inhale 4s → Hold 7s → Exhale 8s. Reduces anxiety and aids sleep.</p>
+              </div>
+            )}
+            {mindfulness==='Meditation'&&(
+              <div style={{background:'var(--emerald-mist)',borderRadius:16,padding:20,textAlign:'center'}}>
+                <div style={{fontSize:40,animation:'pulse 2s ease infinite'}}>🧘</div>
+                <div style={{fontFamily:'Fraunces,serif',fontSize:18,fontWeight:800,marginTop:8}}>Guided Meditation</div>
+                <p style={{color:'var(--text-3)',marginTop:6,fontSize:13}}>Find a quiet spot. Close your eyes. Focus on your breath. Let thoughts pass without judgment.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* VITALS */}
+      {tab==='vitals'&&(
+        <div>
+          <div className="grid-4" style={{marginBottom:16}}>
+            {[
+              {label:'Blood Pressure',val:'120/80',unit:'mmHg',status:'Normal',icon:'❤️',color:'#FF4757'},
+              {label:'Heart Rate',val:'72',unit:'bpm',status:'Resting',icon:'💓',color:'#FF6B81'},
+              {label:'SpO₂',val:'98',unit:'%',status:'Excellent',icon:'🫁',color:'#0EA5E9'},
+              {label:'Temperature',val:'98.4',unit:'°F',status:'Normal',icon:'🌡️',color:'#F59E0B'},
+              {label:'Blood Sugar',val:'95',unit:'mg/dL',status:'Normal',icon:'🩸',color:'#F87171'},
+              {label:'Cholesterol',val:'185',unit:'mg/dL',status:'Good',icon:'🫀',color:'#7C3AED'},
+              {label:'BMI',val:'23.7',unit:'',status:'Healthy',icon:'⚖️',color:'#10B981'},
+              {label:'Sleep Score',val:'82',unit:'/100',status:'Good',icon:'😴',color:'#6366F1'},
+            ].map(v=>(
+              <div key={v.label} className="vital-card">
+                <div style={{fontSize:28,marginBottom:8}}>{v.icon}</div>
+                <div className="vital-val" style={{color:v.color}}>{v.val}<span style={{fontSize:13,fontWeight:500,color:'var(--text-3)'}}>{v.unit}</span></div>
+                <div className="vital-label">{v.label}</div>
+                <span className="badge badge-green" style={{marginTop:6,fontSize:11}}>{v.status}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* MEDICATIONS */}
+      {tab==='meds'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:4}}>
+            <div>
+              <div style={{fontSize:14,color:'var(--text-3)'}}>
+                {meds.filter(m=>m.taken).length}/{meds.length} taken today
+              </div>
+              <div className="progress-wrap" style={{height:6,width:200,marginTop:4}}>
+                <div className="progress-bar" style={{width:`${(meds.filter(m=>m.taken).length/meds.length)*100}%`}}/>
+              </div>
+            </div>
+            <button className="btn btn-primary btn-sm">
+              <Icon name="plus" size={14}/> Add Medication
+            </button>
+          </div>
+          {meds.map(m=>(
+            <div key={m.id} className="med-row">
+              <div className={`med-check${m.taken?' checked':''}`} onClick={()=>toggleMed(m.id)}>
+                {m.taken&&<Icon name="check" size={14} color="#fff"/>}
+              </div>
+              <div style={{fontSize:28}}>{m.icon}</div>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:700,fontSize:14,color:m.taken?'var(--text-3)':'var(--text-1)',textDecoration:m.taken?'line-through':'none'}}>{m.name}</div>
+                <div style={{fontSize:12,color:'var(--text-3)'}}>{m.dose} • {m.time}</div>
+              </div>
+              <span className={`badge${m.taken?' badge-green':' badge-amber'}`}>{m.taken?'Taken':'Pending'}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* NUTRITION */}
+      {tab==='nutrition'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="card" style={{padding:24}}>
+            <h3 style={{fontFamily:'Fraunces,serif',fontSize:18,marginBottom:20}}>Today's Nutrition</h3>
+            <div style={{display:'flex',justifyContent:'space-around',flexWrap:'wrap',gap:16,marginBottom:20}}>
+              <CircularProgress pct={61} size={80} color="#F59E0B" val="1840" label="Calories"/>
+              <CircularProgress pct={75} size={80} color="#0EA5E9" val="142g" label="Protein"/>
+              <CircularProgress pct={55} size={80} color="#00C896" val="220g" label="Carbs"/>
+              <CircularProgress pct={68} size={80} color="#F87171" val="62g" label="Fats"/>
+            </div>
+            <div style={{fontWeight:700,marginBottom:12}}>Today's Meals</div>
+            {[
+              {meal:'Breakfast',items:'Oats, Banana, Milk',cal:420,emoji:'🌅'},
+              {meal:'Lunch',items:'Dal, Rice, Sabzi, Salad',cal:680,emoji:'☀️'},
+              {meal:'Snack',items:'Almonds, Green Tea',cal:180,emoji:'☕'},
+              {meal:'Dinner',items:'Not logged yet',cal:0,emoji:'🌙'},
+            ].map(m=>(
+              <div key={m.meal} style={{display:'flex',alignItems:'center',gap:12,padding:'12px 0',borderBottom:'1px solid var(--border-hard)'}}>
+                <span style={{fontSize:24}}>{m.emoji}</span>
+                <div style={{flex:1}}>
+                  <div style={{fontWeight:700,fontSize:14}}>{m.meal}</div>
+                  <div style={{fontSize:12,color:'var(--text-3)'}}>{m.items}</div>
+                </div>
+                {m.cal>0
+                  ? <span className="badge badge-amber">{m.cal} kcal</span>
+                  : <button className="btn btn-ghost btn-sm"><Icon name="plus" size={12}/> Log</button>
+                }
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* RECORDS */}
+      {tab==='records'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="card" style={{padding:28,textAlign:'center',border:'2px dashed var(--border-hard)'}}>
+            <div style={{fontSize:56,marginBottom:12}}>📁</div>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:20,fontWeight:800,marginBottom:6}}>Upload Health Records</div>
+            <p style={{color:'var(--text-3)',fontSize:14,marginBottom:20}}>Upload lab reports, prescriptions, X-rays, or any medical document</p>
+            <button className="btn btn-primary btn-lg">
+              <Icon name="upload" size={16}/> Choose Files to Upload
+            </button>
+            <div style={{marginTop:12,fontSize:12,color:'var(--text-4)'}}>PDF, JPG, PNG — up to 20MB per file</div>
+          </div>
+          <div style={{fontWeight:700,marginBottom:4}}>Recent Records</div>
+          {[
+            {name:'Blood Test Report — Jan 2025.pdf',date:'Jan 15, 2025',size:'1.2 MB',type:'Lab Report'},
+            {name:'Prescription — Dr. Sharma.pdf',date:'Feb 3, 2025',size:'0.4 MB',type:'Prescription'},
+            {name:'Chest X-Ray.jpg',date:'Dec 20, 2024',size:'3.8 MB',type:'Radiology'},
+          ].map(r=>(
+            <div key={r.name} className="card" style={{padding:'14px 18px',display:'flex',alignItems:'center',gap:12}}>
+              <div style={{fontSize:28}}>📄</div>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:600,fontSize:14}}>{r.name}</div>
+                <div style={{fontSize:12,color:'var(--text-3)'}}>{r.date} • {r.size}</div>
+              </div>
+              <span className="badge badge-blue">{r.type}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   SYMPTOM CHECKER (AI-Powered)
+═══════════════════════════════════════════════════════════════ */
+const SymptomChecker = ()=>{
+  const [messages,setMessages] = useState([
+    {role:'ai',text:"Hello! I'm your AI health assistant. Please describe what symptoms you're experiencing, and I'll help analyze them and ask follow-up questions to better understand your condition. Remember, this is for informational purposes only and not a substitute for professional medical advice."}
+  ]);
+  const [input,setInput] = useState('');
+  const [loading,setLoading] = useState(false);
+  const [results,setResults] = useState(null);
+  const chatRef = useRef();
+
+  const SYSTEM = `You are a compassionate and knowledgeable AI health assistant for SwasthayaLink, India's healthcare platform.
+Your role is to:
+1. Ask intelligent follow-up questions to understand symptoms better (severity, duration, location, triggers)
+2. Analyze symptoms systematically
+3. Provide possible conditions in a clear card format using this JSON when you have enough info:
+{"showResults":true,"conditions":[{"name":"","likelihood":"High/Medium/Low","description":"","action":"","urgency":"See doctor/Monitor/Emergency"}]}
+4. Always recommend consulting a real doctor
+5. Be empathetic, clear, and use simple language
+6. Ask maximum 4-5 follow-up questions before giving results
+Start by asking follow-up questions. After 3-4 exchanges, provide structured results.`;
+
+  const send = async()=>{
+    if(!input.trim()||loading) return;
+    const userMsg = {role:'user',text:input};
+    const newMsgs = [...messages,userMsg];
+    setMessages(newMsgs);
+    setInput('');
+    setLoading(true);
+    try{
+      const apiMsgs = newMsgs.map(m=>({role:m.role==='ai'?'assistant':'user',content:m.text}));
+      const reply = await callClaude(apiMsgs,SYSTEM);
+      // Try to parse JSON results
+      const jsonMatch = reply.match(/\{[\s\S]*"showResults"[\s\S]*\}/);
+      if(jsonMatch){
+        try{
+          const parsed = JSON.parse(jsonMatch[0]);
+          if(parsed.showResults) setResults(parsed.conditions);
+        }catch(e){}
+      }
+      const cleanText = reply.replace(/\{[\s\S]*"showResults"[\s\S]*\}/,'').trim();
+      setMessages(prev=>[...prev,{role:'ai',text:cleanText||'Please describe your symptoms in more detail.'}]);
+    }catch(e){
+      setMessages(prev=>[...prev,{role:'ai',text:'I apologize, I encountered an error. Please try again.'}]);
+    }
+    setLoading(false);
+    setTimeout(()=>chatRef.current?.scrollTo(0,99999),100);
+  };
+
+  const urgencyColors = {'Emergency':'#FF4757','See doctor':'#F59E0B','Monitor':'#00C896'};
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <div style={{marginBottom:20}}>
+        <h1 className="section-title">🩺 AI Symptom Checker</h1>
+        <p className="section-sub">Describe your symptoms and our AI will help analyze them through intelligent questioning</p>
+        <div style={{
+          background:'var(--amber-mist)',border:'1px solid #FDE68A',
+          borderRadius:14,padding:'12px 16px',fontSize:13,color:'#92400E',marginBottom:20
+        }}>
+          ⚠️ This tool is for informational purposes only. Always consult a qualified healthcare professional for medical advice, diagnosis, or treatment.
+        </div>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'1fr 340px',gap:20,alignItems:'start'}}>
+        <div>
+          <div className="card" style={{padding:0,overflow:'hidden'}}>
+            <div style={{
+              padding:'16px 20px',
+              background:'linear-gradient(135deg,var(--emerald-mist),var(--sapphire-mist))',
+              borderBottom:'1px solid var(--border-hard)',
+              display:'flex',alignItems:'center',gap:10
+            }}>
+              <div style={{width:36,height:36,borderRadius:10,background:'linear-gradient(135deg,var(--emerald),var(--sapphire))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>🤖</div>
+              <div>
+                <div style={{fontWeight:700,fontSize:15}}>AI Health Assistant</div>
+                <div style={{fontSize:12,color:'var(--text-3)'}}>● Online • Claude AI Powered</div>
+              </div>
+            </div>
+            <div ref={chatRef} className="chat-wrap" style={{padding:20,minHeight:320,maxHeight:420,overflowY:'auto'}}>
+              {messages.map((m,i)=>(
+                <div key={i} className={`chat-bubble chat-${m.role}`} style={{animationDelay:`${i*0.05}s`}}>
+                  {m.text}
+                </div>
+              ))}
+              {loading&&(
+                <div className="chat-bubble chat-ai">
+                  <span className="animate-pulse">Analyzing your symptoms...</span>
+                </div>
+              )}
+            </div>
+            <div style={{padding:'12px 16px',borderTop:'1px solid var(--border-hard)',display:'flex',gap:8}}>
+              <input className="input" placeholder="Describe your symptoms..." value={input}
+                onChange={e=>setInput(e.target.value)}
+                onKeyDown={e=>e.key==='Enter'&&send()}/>
+              <button className="btn btn-primary btn-icon" onClick={send} disabled={loading}>
+                <Icon name="send" size={16}/>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick symptom buttons */}
+          <div style={{marginTop:12}}>
+            <div style={{fontSize:12,color:'var(--text-3)',marginBottom:8,fontWeight:600}}>COMMON SYMPTOMS — TAP TO DESCRIBE</div>
+            <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+              {['Headache','Fever','Cough','Fatigue','Nausea','Back pain','Chest pain','Dizziness','Sore throat','Stomach ache'].map(s=>(
+                <button key={s} className="badge badge-blue" style={{cursor:'pointer',padding:'6px 12px'}}
+                  onClick={()=>setInput(s)}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* RESULTS */}
+        <div>
+          {results?(
+            <div>
+              <div style={{fontWeight:700,fontSize:16,marginBottom:12}}>Possible Conditions</div>
+              {results.map((c,i)=>(
+                <div key={i} className="card" style={{padding:16,marginBottom:10}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
+                    <div style={{fontWeight:700,fontSize:15}}>{c.name}</div>
+                    <span className="badge" style={{background:`${urgencyColors[c.urgency]||'#ccc'}18`,color:urgencyColors[c.urgency]||'#666',fontSize:11}}>{c.likelihood}</span>
+                  </div>
+                  <p style={{fontSize:13,color:'var(--text-2)',lineHeight:1.5,marginBottom:8}}>{c.description}</p>
+                  <div style={{fontSize:12,fontWeight:600,color:urgencyColors[c.urgency]||'#666'}}>
+                    → {c.action}
+                  </div>
+                  <div style={{marginTop:6}}>
+                    <span className="badge" style={{background:`${urgencyColors[c.urgency]||'#ccc'}18`,color:urgencyColors[c.urgency]||'#666',fontSize:11}}>
+                      {c.urgency}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              <button className="btn btn-outline btn-full" style={{marginTop:4}} onClick={()=>{setResults(null);setMessages([{role:'ai',text:"Hello! I'm your AI health assistant. Please describe what symptoms you're experiencing."}]);}}>
+                Start New Check
+              </button>
+            </div>
+          ):(
+            <div className="card" style={{padding:24}}>
+              <div style={{fontSize:48,textAlign:'center',marginBottom:12}}>🤖</div>
+              <div style={{fontWeight:700,fontSize:16,marginBottom:8,textAlign:'center'}}>How It Works</div>
+              {['Describe your symptoms in the chat','AI asks smart follow-up questions','Receive possible conditions in cards','Always consult a real doctor'].map((s,i)=>(
+                <div key={i} style={{display:'flex',gap:10,padding:'8px 0',borderBottom:i<3?'1px solid var(--border-hard)':'none'}}>
+                  <div style={{
+                    width:24,height:24,borderRadius:'50%' ,
+                    background:'linear-gradient(135deg,var(--emerald),var(--sapphire))',
+                    color:'#fff',fontSize:12,fontWeight:800,
+                    display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0
+                  }}>{i+1}</div>
+                  <span style={{fontSize:13,color:'var(--text-2)'}}>{s}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   FIRST AID
+═══════════════════════════════════════════════════════════════ */
+const FirstAidTab = ()=>{
+  const [selected,setSelected] = useState(null);
+  const [voiceOn,setVoiceOn] = useState(false);
+  const [currentStep,setCurrentStep] = useState(0);
+
+  const guides = [
+    {id:'cpr',emoji:'💓',title:'CPR',color:'#FF4757',bg:'#FFF0F1',steps:[
+      {icon:'🔍',title:'Assess the Scene',desc:'Ensure the area is safe. Check if the person is responsive by tapping shoulders and shouting "Are you OK?"'},
+      {icon:'📞',title:'Call Emergency Services',desc:'Call 112 immediately or ask someone else to call. Put phone on speaker if alone.'},
+      {icon:'🫀',title:'Start Chest Compressions',desc:'Place heel of hand on center of chest. Press down 2 inches at 100-120 compressions/min. Allow full recoil.'},
+      {icon:'💨',title:'Give Rescue Breaths',desc:'Tilt head, lift chin. Pinch nose, give 2 breaths over 1 second each. Watch for chest rise.'},
+      {icon:'🔄',title:'Continue 30:2 Ratio',desc:'30 compressions followed by 2 breaths. Continue until help arrives or AED is available.'},
+      {icon:'⚡',title:'Use AED if Available',desc:'Turn on AED, follow voice instructions. Apply pads and deliver shock if advised.'},
+    ],dos:['Start CPR immediately','Push hard and fast','Allow chest to fully recoil','Minimize interruptions'],donts:["Don't stop until help arrives","Don't give breaths if untrained","Don't compress too fast or slow","Don't lean on chest"]},
+
+    {id:'choking',emoji:'🫁',title:'Choking',color:'#F59E0B',bg:'#FFF8E7',steps:[
+      {icon:'❓',title:'Identify Choking',desc:'Signs: unable to speak, clutching throat, turning blue, silent cough. Act immediately.'},
+      {icon:'📢',title:'Encourage Coughing',desc:'If they can cough, encourage forceful coughing to dislodge the obstruction.'},
+      {icon:'👋',title:'Give 5 Back Blows',desc:'Lean them forward. Use heel of hand to give 5 firm blows between shoulder blades.'},
+      {icon:'🤲',title:'Perform Heimlich Maneuver',desc:'Stand behind, make fist above navel. Give 5 firm upward abdominal thrusts.'},
+      {icon:'🔄',title:'Alternate Until Clear',desc:'Alternate 5 back blows and 5 abdominal thrusts until object dislodges or help arrives.'},
+    ],dos:['Act quickly','Stay calm','Alternate back blows and thrusts','Call 112 if unresponsive'],donts:["Don't do blind finger sweeps","Don't give back blows for infants","Don't leave the person alone","Don't delay calling emergency services"]},
+
+    {id:'burn',emoji:'🔥',title:'Burns',color:'#EF4444',bg:'#FFF0F0',steps:[
+      {icon:'🚿',title:'Cool the Burn',desc:'Run cool (not cold) water over burn for 10-20 minutes. Remove jewelry/tight items.'},
+      {icon:'🩹',title:'Cover Loosely',desc:'Use a clean non-fluffy material like cling film or clean plastic bag.'},
+      {icon:'💊',title:'Pain Relief',desc:'Give paracetamol or ibuprofen if available and patient can swallow.'},
+      {icon:'🏥',title:'Seek Medical Help',desc:'Go to A&E for burns larger than 3cm, on face/hands/feet, or chemical/electrical burns.'},
+    ],dos:['Cool immediately with cool water','Remove jewelry/clothing','Cover loosely','Seek medical help for severe burns'],donts:["Don't use ice or ice water","Don't burst blisters","Don't apply butter or toothpaste","Don't use fluffy materials"]},
+
+    {id:'fracture',emoji:'🦴',title:'Fractures',color:'#7C3AED',bg:'#F5F0FF',steps:[
+      {icon:'🛑',title:'Keep Still',desc:'Tell the person not to move the injured area. Support it in the position found.'},
+      {icon:'🧊',title:'Apply Cold Pack',desc:'Wrap ice in cloth and apply to area to reduce swelling. Never apply directly.'},
+      {icon:'🩹',title:'Immobilize',desc:'Use a splint if available. Pad with soft material. Support above and below the injury.'},
+      {icon:'🏥',title:'Go to Hospital',desc:'Get to hospital immediately. Call 102 if the person cannot be safely moved.'},
+    ],dos:['Keep the person still','Immobilize the area','Apply ice pack wrapped in cloth','Call for emergency help if needed'],donts:["Don't try to straighten the bone","Don't move the person unnecessarily","Don't apply ice directly","Don't give food/water if surgery may be needed"]},
+
+    {id:'bleed',emoji:'🩸',title:'Heavy Bleeding',color:'#DC2626',bg:'#FEF2F2',steps:[
+      {icon:'🧤',title:'Protect Yourself',desc:'Use gloves or plastic bags if available. Avoid contact with blood if possible.'},
+      {icon:'🤲',title:'Apply Direct Pressure',desc:'Press firmly on wound with clean cloth. Maintain continuous pressure.'},
+      {icon:'⬆️',title:'Elevate if Possible',desc:'Raise the injured area above heart level if no fracture is suspected.'},
+      {icon:'🩹',title:'Bandage Firmly',desc:'When bleeding slows, bandage firmly but not too tight. Do not remove soaked bandages — add more on top.'},
+      {icon:'🏥',title:'Emergency Services',desc:'For severe bleeding, call 102 immediately. Keep person lying down and warm.'},
+    ],dos:['Apply firm continuous pressure','Elevate the wound','Keep applying pressure even if soaked','Call emergency services'],donts:["Don't remove first dressing","Don't use a tourniquet unless trained","Don't probe the wound","Don't give anything to eat or drink"]},
+
+    {id:'stroke',emoji:'🧠',title:'Stroke — FAST',color:'#0EA5E9',bg:'#E0F4FF',steps:[
+      {icon:'😐',title:'F — Face Drooping',desc:'Ask the person to smile. Is one side drooping? Facial weakness is a key sign.'},
+      {icon:'💪',title:'A — Arm Weakness',desc:'Ask to raise both arms. Does one drift downward? Arm weakness indicates stroke.'},
+      {icon:'💬',title:'S — Speech Difficulty',desc:'Ask to repeat a simple phrase. Is speech slurred or strange?'},
+      {icon:'⏱️',title:'T — Time to Call 112',desc:'If ANY of these signs, call 112 IMMEDIATELY. Note the time symptoms started.'},
+      {icon:'⬇️',title:'Keep Them Safe',desc:'Keep calm, laid down, nothing to eat or drink. Do not give aspirin.'},
+    ],dos:['Act FAST','Call 112 immediately','Note time symptoms started','Keep calm and comfortable'],donts:["Don't give aspirin","Don't give food or drink","Don't leave them alone","Don't wait to see if it passes"]},
+  ];
+
+  const speakStep = (text)=>{
+    if('speechSynthesis' in window){
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.rate = 0.9;
+      utter.pitch = 1;
+      window.speechSynthesis.speak(utter);
+    }
+  };
+
+  const handleVoice = (step)=>{
+    if(voiceOn) speakStep(`Step ${currentStep+1}: ${step.title}. ${step.desc}`);
+  };
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <h1 className="section-title">🚑 First Aid Guide</h1>
+      <p className="section-sub">Step-by-step illustrated guidance for medical emergencies</p>
+
+      {!selected?(
+        <div className="grid-3">
+          {guides.map(g=>(
+            <div key={g.id} className="card" style={{padding:24,cursor:'pointer',border:`2px solid transparent`}}
+              onClick={()=>{setSelected(g);setCurrentStep(0);}}>
+              <div style={{fontSize:52,marginBottom:12,textAlign:'center'}}>{g.emoji}</div>
+              <div style={{fontFamily:'Fraunces,serif',fontSize:18,fontWeight:800,textAlign:'center',marginBottom:4}}>{g.title}</div>
+              <div style={{fontSize:12,color:'var(--text-3)',textAlign:'center',marginBottom:12}}>{g.steps.length} steps</div>
+              <button className="btn btn-full" style={{background:g.bg,color:g.color,fontWeight:700,fontSize:13}}>
+                View Guide →
+              </button>
+            </div>
+          ))}
+        </div>
+      ):(
+        <div>
+          <div style={{display:'flex',gap:12,marginBottom:20,flexWrap:'wrap'}}>
+            <button className="btn btn-ghost" onClick={()=>setSelected(null)}>← Back to Guides</button>
+            <button className={`btn ${voiceOn?'btn-primary':'btn-outline'}`}
+              onClick={()=>{setVoiceOn(v=>{const nv=!v;if(!v)speakStep(selected.steps[currentStep]?.desc||'');return nv;})}}>
+              <Icon name="mic" size={14}/> {voiceOn?'Voice On':'Voice Off'}
+            </button>
+          </div>
+
+          <div style={{display:'grid',gridTemplateColumns:'1fr 300px',gap:20}}>
+            <div>
+              <div style={{
+                background:`linear-gradient(135deg,${selected.bg},white)`,
+                borderRadius:20,padding:'24px',marginBottom:20,
+                display:'flex',alignItems:'center',gap:16
+              }}>
+                <div style={{fontSize:60}}>{selected.emoji}</div>
+                <div>
+                  <h2 style={{fontFamily:'Fraunces,serif',fontSize:28,fontWeight:900}}>{selected.title}</h2>
+                  <p style={{color:'var(--text-3)',fontSize:14}}>Follow these steps carefully</p>
+                </div>
+              </div>
+
+              {/* Steps */}
+              <div style={{display:'flex',flexDirection:'column',gap:12}}>
+                {selected.steps.map((s,i)=>(
+                  <div key={i} className="step-card" style={{
+                    borderLeftColor:i===currentStep?selected.color:'var(--border-hard)',
+                    background:i===currentStep?`${selected.bg}`:undefined,
+                    cursor:'pointer',opacity:i<currentStep?0.6:1,
+                  }} onClick={()=>{setCurrentStep(i);handleVoice(s);}}>
+                    <div style={{display:'flex',gap:14,alignItems:'flex-start'}}>
+                      <div className="step-num" style={{background:i<=currentStep?`linear-gradient(135deg,${selected.color},${selected.color}aa)`:'var(--bg-subtle)',color:i<=currentStep?'#fff':'var(--text-3)'}}>
+                        {i<currentStep?'✓':i+1}
+                      </div>
+                      <div style={{flex:1}}>
+                        <div style={{display:'flex',gap:8,alignItems:'center',marginBottom:4}}>
+                          <span style={{fontSize:20}}>{s.icon}</span>
+                          <div style={{fontWeight:700,fontSize:15}}>{s.title}</div>
+                        </div>
+                        {(i===currentStep||i<currentStep)&&(
+                          <p style={{fontSize:14,color:'var(--text-2)',lineHeight:1.6}}>{s.desc}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{display:'flex',gap:10,marginTop:16}}>
+                <button className="btn btn-ghost btn-lg" disabled={currentStep===0}
+                  onClick={()=>setCurrentStep(c=>c-1)}>← Previous</button>
+                {currentStep<selected.steps.length-1
+                  ? <button className="btn btn-primary btn-lg" onClick={()=>{setCurrentStep(c=>c+1);handleVoice(selected.steps[currentStep+1]);}}>Next Step →</button>
+                  : <button className="btn btn-primary btn-lg" onClick={()=>setCurrentStep(0)}>Restart Guide 🔄</button>
+                }
+              </div>
+            </div>
+
+            {/* Do's and Don'ts */}
+            <div style={{display:'flex',flexDirection:'column',gap:14}}>
+              <div className="card" style={{padding:20,border:`1px solid ${selected.color}22`}}>
+                <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
+                  <span style={{fontSize:20}}>✅</span>
+                  <div style={{fontWeight:700,color:'var(--emerald-deep)'}}>Do's</div>
+                </div>
+                {selected.dos.map((d,i)=>(
+                  <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:i<selected.dos.length-1?'1px solid var(--border-hard)':'none'}}>
+                    <span style={{color:'var(--emerald)',flexShrink:0,marginTop:1}}>✓</span>
+                    <span style={{fontSize:13,color:'var(--text-2)'}}>{d}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="card" style={{padding:20,border:'1px solid #FF475722'}}>
+                <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
+                  <span style={{fontSize:20}}>❌</span>
+                  <div style={{fontWeight:700,color:'#FF4757'}}>Don'ts</div>
+                </div>
+                {selected.donts.map((d,i)=>(
+                  <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:i<selected.donts.length-1?'1px solid var(--border-hard)':'none'}}>
+                    <span style={{color:'#FF4757',flexShrink:0,marginTop:1}}>✗</span>
+                    <span style={{fontSize:13,color:'var(--text-2)'}}>{d}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="card" style={{padding:16,background:'var(--emerald-mist)'}}>
+                <div style={{fontWeight:700,marginBottom:8,fontSize:14}}>📞 Emergency Numbers</div>
+                {[{l:'Ambulance',n:'102'},{l:'Police',n:'100'},{l:'Fire',n:'101'},{l:'National',n:'112'}].map(e=>(
+                  <div key={e.n} style={{display:'flex',justifyContent:'space-between',padding:'4px 0',fontSize:13}}>
+                    <span style={{color:'var(--text-2)'}}>{e.l}</span>
+                    <a href={`tel:${e.n}`} style={{fontWeight:800,color:'var(--coral)',textDecoration:'none'}}>{e.n}</a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   REMEDIES
+═══════════════════════════════════════════════════════════════ */
+const RemediesTab = ()=>{
+  const [query,setQuery] = useState('');
+  const [activeTab,setActiveTab] = useState('remedies');
+  const [loading,setLoading] = useState(false);
+  const [aiResult,setAiResult] = useState('');
+  const [searchDone,setSearchDone] = useState(false);
+
+  const popularRemedies = [
+    {emoji:'🍯',name:'Honey & Ginger',for:'Cough & Cold',color:'#FFF8E7',tags:['cough','cold','throat']},
+    {emoji:'🌿',name:'Tulsi (Holy Basil)',for:'Immunity & Fever',color:'#ECFDF5',tags:['fever','immunity','antiviral']},
+    {emoji:'🟡',name:'Turmeric Milk',for:'Inflammation & Sleep',color:'#FFF8E7',tags:['inflammation','sleep','immunity']},
+    {emoji:'🫚',name:'Ginger Tea',for:'Digestion & Nausea',color:'#ECFDF5',tags:['nausea','digestion','stomach']},
+    {emoji:'🌾',name:'Ashwagandha',for:'Stress & Energy',color:'#F5F0FF',tags:['stress','energy','anxiety']},
+    {emoji:'🫐',name:'Amla (Gooseberry)',for:'Vitamin C & Hair',color:'#E0F4FF',tags:['vitamin c','hair','skin']},
+    {emoji:'🧄',name:'Garlic',for:'Heart & Immunity',color:'#FFF0F1',tags:['heart','immunity','antibacterial']},
+    {emoji:'🫖',name:'Peppermint Tea',for:'Headache & Digestion',color:'#E6FAF4',tags:['headache','digestion','energy']},
+    {emoji:'🌹',name:'Rose Water',for:'Skin & Eye Care',color:'#FFF0F1',tags:['skin','eyes','inflammation']},
+    {emoji:'🍋',name:'Lemon & Honey',for:'Weight & Immunity',color:'#FFF8E7',tags:['weight','immunity','detox']},
+    {emoji:'🪴',name:'Neem',for:'Skin & Blood Purifier',color:'#ECFDF5',tags:['skin','blood','acne']},
+    {emoji:'🌰',name:'Triphala',for:'Digestion & Detox',color:'#FEF3C7',tags:['digestion','detox','constipation']},
+  ];
+
+  const articles = [
+    {title:'Ayurvedic Remedies for Monsoon Health',cat:'Ayurveda',read:'5 min',emoji:'🌧️'},
+    {title:'10 Science-Backed Benefits of Turmeric',cat:'Research',read:'8 min',emoji:'🟡'},
+    {title:'Traditional Indian Remedies for Stress',cat:'Wellness',read:'6 min',emoji:'🧘'},
+    {title:'Seasonal Immunity Boosters You Need',cat:'Nutrition',read:'4 min',emoji:'🌿'},
+    {title:'Yoga Asanas for Common Ailments',cat:'Yoga',read:'7 min',emoji:'🧘‍♀️'},
+    {title:'Kitchen Medicines: What Your Spices Can Cure',cat:'Ayurveda',read:'10 min',emoji:'🌶️'},
+  ];
+
+  const fakeVideos = [
+    {title:'How to Make Kadha for Immunity',channel:'Ayurveda Daily',views:'2.3M',emoji:'☕',dur:'8:42'},
+    {title:'10 Natural Remedies for Cold & Flu',channel:'Health Tips India',views:'1.8M',emoji:'🤧',dur:'12:15'},
+    {title:'Turmeric Milk: Golden Milk Recipe',channel:'Healthy Living',views:'3.1M',emoji:'🥛',dur:'5:30'},
+    {title:'Ashwagandha: Complete Guide',channel:'Wellness Hub',views:'892K',emoji:'🌿',dur:'15:22'},
+    {title:'Ancient Ginger Tea Secrets',channel:'Ayurveda Life',views:'1.4M',emoji:'🫚',dur:'9:10'},
+    {title:'Natural Sleep Remedies That Work',channel:'Sleep Science',views:'2.7M',emoji:'😴',dur:'11:45'},
+  ];
+
+  const filtered = query
+    ? popularRemedies.filter(r=>r.name.toLowerCase().includes(query.toLowerCase())||r.for.toLowerCase().includes(query.toLowerCase())||r.tags.some(t=>t.includes(query.toLowerCase())))
+    : popularRemedies;
+
+  const searchRemedies = async()=>{
+    if(!query.trim()) return;
+    setLoading(true);setSearchDone(true);
+    try{
+      const res = await callClaude(
+        [{role:'user',content:`Give me detailed natural home remedies for: "${query}". Include ingredients, preparation method, and precautions. Format nicely with sections.`}],
+        'You are an expert in Ayurveda and natural remedies. Provide safe, evidence-based information. Always mention to consult a doctor for serious conditions. Keep response concise but complete.'
+      );
+      setAiResult(res);
+    }catch(e){setAiResult('Unable to fetch AI results. Showing general remedies below.');}
+    setLoading(false);
+  };
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <h1 className="section-title">🌿 Natural Remedies</h1>
+      <p className="section-sub">AI-powered search for natural healing wisdom</p>
+
+      <div className="search-bar" style={{marginBottom:24,maxWidth:600}}>
+        <span style={{fontSize:20}}>🔍</span>
+        <input className="search-input" placeholder="Search remedies (e.g. headache, cold, diabetes...)"
+          value={query} onChange={e=>setQuery(e.target.value)}
+          onKeyDown={e=>e.key==='Enter'&&searchRemedies()}/>
+        <button className="search-btn" onClick={searchRemedies} disabled={loading}>
+          {loading?'Searching...':'Search'}
+        </button>
+      </div>
+
+      {/* AI Result */}
+      {searchDone&&(
+        <div className="card" style={{padding:24,marginBottom:24,borderLeft:'4px solid var(--emerald)'}}>
+          <div style={{display:'flex',gap:10,alignItems:'center',marginBottom:12}}>
+            <span style={{fontSize:24}}>🤖</span>
+            <div style={{fontWeight:700}}>AI-Powered Remedy Guide for "{query}"</div>
+          </div>
+          {loading
+            ? <div className="animate-pulse" style={{color:'var(--text-3)'}}>Searching ancient wisdom and modern research...</div>
+            : <div style={{fontSize:14,lineHeight:1.8,color:'var(--text-2)',whiteSpace:'pre-wrap'}}>{aiResult}</div>
+          }
+        </div>
+      )}
+
+      <div className="tab-list" style={{marginBottom:20}}>
+        {['remedies','videos','articles'].map(t=>(
+          <button key={t} className={`tab-btn${activeTab===t?' active':''}`}
+            onClick={()=>setActiveTab(t)}>
+            {t==='remedies'?'🌿 Remedies':t==='videos'?'▶️ Videos':'📖 Articles'}
+          </button>
+        ))}
+      </div>
+
+      {activeTab==='remedies'&&(
+        <div className="grid-4">
+          {filtered.map((r,i)=>(
+            <div key={i} className="card" style={{padding:20,background:r.color,cursor:'pointer'}}>
+              <div style={{fontSize:40,marginBottom:8}}>{r.emoji}</div>
+              <div style={{fontWeight:800,fontSize:14,marginBottom:4}}>{r.name}</div>
+              <div style={{fontSize:12,color:'var(--text-3)',marginBottom:8}}>{r.for}</div>
+              <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+                {r.tags.slice(0,2).map(t=>(
+                  <span key={t} className="badge badge-green" style={{fontSize:10}}>{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeTab==='videos'&&(
+        <div>
+          <div style={{
+            background:'var(--coral-mist)',borderRadius:14,padding:'10px 16px',
+            fontSize:12,color:'#991B1B',marginBottom:16,display:'flex',gap:8,alignItems:'center'
+          }}>
+            <Icon name="youtube" size={16} color="#FF0000"/>
+            Note: Connect your YouTube API key in settings to load live videos. Showing sample content below.
+          </div>
+          <div className="grid-3">
+            {fakeVideos.map((v,i)=>(
+              <div key={i} className="card video-card" style={{overflow:'hidden'}}>
+                <div className="video-thumb">
+                  <div style={{fontSize:60}}>{v.emoji}</div>
+                  <div className="play-overlay">
+                    <div className="play-circle"><Icon name="play" size={18} color="#FF4757"/></div>
+                  </div>
+                  <div style={{position:'absolute',bottom:8,right:8,background:'rgba(0,0,0,0.7)',color:'#fff',fontSize:11,padding:'2px 6px',borderRadius:4}}>{v.dur}</div>
+                </div>
+                <div style={{padding:'12px 14px'}}>
+                  <div style={{fontWeight:700,fontSize:13,marginBottom:4,lineHeight:1.3}}>{v.title}</div>
+                  <div style={{fontSize:12,color:'var(--text-3)'}}>{v.channel}</div>
+                  <div style={{fontSize:11,color:'var(--text-4)',marginTop:2}}>{v.views} views</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab==='articles'&&(
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          {articles.map((a,i)=>(
+            <div key={i} className="card" style={{padding:'16px 20px',display:'flex',alignItems:'center',gap:14,cursor:'pointer'}}>
+              <div style={{fontSize:36}}>{a.emoji}</div>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:700,fontSize:15,marginBottom:3}}>{a.title}</div>
+                <div style={{display:'flex',gap:8}}>
+                  <span className="badge badge-green">{a.cat}</span>
+                  <span style={{fontSize:12,color:'var(--text-3)'}}>{a.read} read</span>
+                </div>
+              </div>
+              <Icon name="chevRight" size={18} color="var(--text-4)"/>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   EMERGENCY TAB
+═══════════════════════════════════════════════════════════════ */
+const EmergencyTab = ()=>{
+  const [medSearch,setMedSearch] = useState('');
+  const [pharmacies,setPharmacies] = useState(null);
+  const [loadingPharm,setLoadingPharm] = useState(false);
+  const [showCPR,setShowCPR] = useState(false);
+  const [locationShared,setLocationShared] = useState(false);
+
+  const shareLocation = ()=>{
+    if('geolocation' in navigator){
+      navigator.geolocation.getCurrentPosition(
+        ()=>{setLocationShared(true);setTimeout(()=>setLocationShared(false),3000);},
+        ()=>alert('Location permission denied')
+      );
+    }
+  };
+
+  const findPharmacies = async()=>{
+    if(!medSearch.trim()) return;
+    setLoadingPharm(true);
+    // Simulate pharmacy search (real implementation would use Maps API)
+    await new Promise(r=>setTimeout(r,1500));
+    setPharmacies([
+      {name:'MedPlus Pharmacy',dist:'0.3 km',address:'Shop 12, Sector 15 Market',open:true,phone:'9876543210'},
+      {name:'Apollo Pharmacy',dist:'0.7 km',address:'Near Civil Hospital, Main Road',open:true,phone:'9812345678'},
+      {name:'Netmeds Express',dist:'1.2 km',address:'Aravali Mall, Ground Floor',open:false,phone:'9988776655'},
+      {name:'Jan Aushadhi Kendra',dist:'1.5 km',address:'Community Center, Block C',open:true,phone:'9977665544'},
+    ]);
+    setLoadingPharm(false);
+  };
+
+  const cprSteps=[
+    'Check for breathing and consciousness',
+    'Call 112 immediately',
+    'Place heel of hand on center of chest',
+    'Push down 2 inches at 100-120 beats/min',
+    'Give 2 rescue breaths every 30 compressions',
+    'Continue until help arrives',
+  ];
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <div style={{marginBottom:20}}>
+        <h1 className="section-title">🆘 Emergency Center</h1>
+        <p className="section-sub">Quick access to emergency services and critical health tools</p>
+      </div>
+
+      {/* EMERGENCY CALL BUTTONS */}
+      <div style={{display:'flex',flexDirection:'column',gap:12,marginBottom:28}}>
+        <div style={{fontWeight:700,fontSize:16,marginBottom:4}}>📞 Emergency Services</div>
+        <div className="grid-2">
+          {[
+            {label:'🚑 Ambulance',num:'102',bg:'linear-gradient(135deg,#FF4757,#c0392b)',action:()=>window.open('tel:102')},
+            {label:'🚓 Police',num:'100',bg:'linear-gradient(135deg,#0EA5E9,#0369a1)',action:()=>window.open('tel:100')},
+            {label:'🚒 Fire Brigade',num:'101',bg:'linear-gradient(135deg,#F59E0B,#d97706)',action:()=>window.open('tel:101')},
+            {label:'📞 National Emergency',num:'112',bg:'linear-gradient(135deg,#7C3AED,#5b21b6)',action:()=>window.open('tel:112')},
+          ].map(e=>(
+            <button key={e.num} className="em-btn" style={{background:e.bg}} onClick={e.action}>
+              <span>{e.label}</span>
+              <span className="em-num">{e.num}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* SHARE LOCATION */}
+      <div className="card" style={{padding:20,marginBottom:20,background:'var(--emerald-mist)',border:'1px solid rgba(0,200,150,0.2)'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:12}}>
+          <div style={{display:'flex',gap:12,alignItems:'center'}}>
+            <div style={{fontSize:36}}>📍</div>
+            <div>
+              <div style={{fontWeight:700,fontSize:16}}>Share My Location</div>
+              <div style={{fontSize:13,color:'var(--text-3)'}}>Send your current location to emergency contacts</div>
+            </div>
+          </div>
+          <button className="btn btn-primary btn-lg" onClick={shareLocation}>
+            <Icon name="share" size={16}/> {locationShared?'✓ Location Shared!':'Share Location'}
+          </button>
+        </div>
+      </div>
+
+      {/* FIND PHARMACY */}
+      <div className="card" style={{padding:24,marginBottom:20}}>
+        <div style={{display:'flex',gap:10,alignItems:'center',marginBottom:16}}>
+          <span style={{fontSize:28}}>💊</span>
+          <div>
+            <div style={{fontWeight:700,fontSize:16}}>Find Medicine Nearby</div>
+            <div style={{fontSize:13,color:'var(--text-3)'}}>Search for a medicine to locate nearby pharmacies</div>
+          </div>
+        </div>
+        <div style={{display:'flex',gap:8,marginBottom:16}}>
+          <input className="input" style={{flex:1}} placeholder="Enter medicine name (e.g. Paracetamol, Calpol...)"
+            value={medSearch} onChange={e=>setMedSearch(e.target.value)}
+            onKeyDown={e=>e.key==='Enter'&&findPharmacies()}/>
+          <button className="btn btn-primary" onClick={findPharmacies} disabled={loadingPharm}>
+            {loadingPharm?<span className="animate-spin">⟳</span>:<><Icon name="search" size={14}/> Search</>}
+          </button>
+        </div>
+        {pharmacies&&(
+          <div style={{display:'flex',flexDirection:'column',gap:10}}>
+            <div style={{fontSize:13,fontWeight:600,color:'var(--text-3)'}}>Found {pharmacies.length} pharmacies near you</div>
+            {pharmacies.map((p,i)=>(
+              <div key={i} className="card card-sm" style={{padding:'14px 16px',display:'flex',gap:12,alignItems:'flex-start'}}>
+                <span style={{fontSize:24}}>🏥</span>
+                <div style={{flex:1}}>
+                  <div style={{fontWeight:700,fontSize:14}}>{p.name}</div>
+                  <div style={{fontSize:12,color:'var(--text-3)'}}>{p.address}</div>
+                  <div style={{display:'flex',gap:8,marginTop:4}}>
+                    <span className={`badge ${p.open?'badge-green':'badge-red'}`}>{p.open?'Open Now':'Closed'}</span>
+                    <span className="badge badge-blue">{p.dist}</span>
+                  </div>
+                </div>
+                <div style={{display:'flex',gap:6,flexDirection:'column'}}>
+                  <button className="btn btn-primary btn-sm" onClick={()=>window.open(`tel:${p.phone}`)}>
+                    <Icon name="phone" size={12}/> Call
+                  </button>
+                  <button className="btn btn-ghost btn-sm">
+                    <Icon name="mapPin" size={12}/> Map
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* CPR QUICK GUIDE */}
+      <div className="card" style={{padding:24,marginBottom:20}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:showCPR?16:0}}>
+          <div style={{display:'flex',gap:10,alignItems:'center'}}>
+            <span style={{fontSize:28}}>💓</span>
+            <div>
+              <div style={{fontWeight:700,fontSize:16}}>CPR Quick Guide</div>
+              <div style={{fontSize:13,color:'var(--text-3)'}}>Life-saving compression technique</div>
+            </div>
+          </div>
+          <button className="btn btn-outline" onClick={()=>setShowCPR(v=>!v)}>
+            {showCPR?'Collapse':'View Guide'}
+          </button>
+        </div>
+        {showCPR&&(
+          <div style={{display:'flex',flexDirection:'column',gap:10,animation:'fadeSlideUp 0.3s ease'}}>
+            {cprSteps.map((s,i)=>(
+              <div key={i} style={{display:'flex',gap:12,alignItems:'center',padding:'10px 14px',background:i%2===0?'var(--bg-subtle)':'transparent',borderRadius:10}}>
+                <div className="step-num" style={{width:28,height:28,fontSize:13}}>{i+1}</div>
+                <span style={{fontSize:14,color:'var(--text-2)',fontWeight:500}}>{s}</span>
+              </div>
+            ))}
+            <div style={{background:'var(--coral-mist)',borderRadius:12,padding:'12px 16px',marginTop:4}}>
+              <div style={{fontWeight:700,color:'#991B1B',marginBottom:4}}>⚠️ Important</div>
+              <div style={{fontSize:13,color:'#7F1D1D'}}>CPR should be learned through certified training. This is a quick reference only. Call 112 immediately.</div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* HOSPITAL LOCATOR */}
+      <div className="card" style={{padding:24}}>
+        <div style={{fontWeight:700,fontSize:16,marginBottom:12}}>🏥 Nearest Hospitals</div>
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          {[
+            {name:'AIIMS Delhi',type:'Government',dist:'12 km',rating:'★ 4.8'},
+            {name:'Fortis Healthcare',type:'Private',dist:'3.2 km',rating:'★ 4.6'},
+            {name:'District Civil Hospital',type:'Government',dist:'1.8 km',rating:'★ 4.2'},
+          ].map((h,i)=>(
+            <div key={i} className="card card-sm" style={{padding:'12px 16px',display:'flex',gap:12,alignItems:'center'}}>
+              <span style={{fontSize:24}}>🏥</span>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:700,fontSize:14}}>{h.name}</div>
+                <div style={{fontSize:12,color:'var(--text-3)'}}>{h.type} • {h.dist} away</div>
+              </div>
+              <div style={{textAlign:'right'}}>
+                <div style={{fontSize:12,color:'#F59E0B',fontWeight:600}}>{h.rating}</div>
+                <button className="btn btn-primary btn-sm" style={{marginTop:4}} onClick={()=>window.open('tel:112')}>
+                  <Icon name="phone" size={12}/> Call
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   PROFILE TAB
+═══════════════════════════════════════════════════════════════ */
+const ProfileTab = ()=>{
+  const [editMode,setEditMode] = useState(false);
+  const [form,setForm] = useState({name:'Aryan Sharma',age:'27',blood:'O+',height:'175',weight:'72.5',phone:'+91 98765 43210',email:'aryan.sharma@email.com'});
+  const [contacts,setContacts] = useState([
+    {name:'Priya Sharma',rel:'Sister',phone:'+91 98888 77777',emoji:'👩'},
+    {name:'Rajesh Sharma',rel:'Father',phone:'+91 99999 11111',emoji:'👨'},
+  ]);
+  const [notifications,setNotifications] = useState(true);
+  const [location,setLocation] = useState(true);
+  const [sharing,setSharing] = useState(false);
+
+  return(
+    <div className="container section" style={{paddingBottom:80}}>
+      <h1 className="section-title">👤 My Profile</h1>
+      <p className="section-sub">Manage your health profile and preferences</p>
+
+      <div style={{display:'grid',gridTemplateColumns:'1fr 340px',gap:20,alignItems:'start'}}>
+        <div>
+          {/* Profile Card */}
+          <div className="card" style={{padding:32,marginBottom:16,textAlign:'center'}}>
+            <div className="profile-avatar">🧑‍💼</div>
+            <div style={{fontFamily:'Fraunces,serif',fontSize:24,fontWeight:900}}>{form.name}</div>
+            <div style={{fontSize:14,color:'var(--text-3)',marginBottom:16}}>{form.email}</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',borderTop:'1px solid var(--border-hard)',borderLeft:'1px solid var(--border-hard)',borderRadius:0,overflow:'hidden'}}>
+              {[{val:form.age+'yr',l:'Age'},{val:form.blood,l:'Blood'},{val:form.height+'cm',l:'Height'},{val:form.weight+'kg',l:'Weight'}].map((s,i)=>(
+                <div key={i} className="profile-stat" style={{borderBottom:'1px solid var(--border-hard)',borderRight:'1px solid var(--border-hard)'}}>
+                  <div className="profile-stat-val">{s.val}</div>
+                  <div className="profile-stat-label">{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Edit Form */}
+          <div className="card" style={{padding:24,marginBottom:16}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+              <div style={{fontWeight:700,fontSize:16}}>Personal Information</div>
+              <button className={`btn ${editMode?'btn-primary':'btn-outline'} btn-sm`} onClick={()=>setEditMode(v=>!v)}>
+                {editMode?'Save Changes':'Edit Profile'}
+              </button>
+            </div>
+            <div className="grid-2">
+              {[
+                {label:'Full Name',key:'name',type:'text'},
+                {label:'Age',key:'age',type:'number'},
+                {label:'Blood Group',key:'blood',type:'text'},
+                {label:'Height (cm)',key:'height',type:'number'},
+                {label:'Weight (kg)',key:'weight',type:'number'},
+                {label:'Phone',key:'phone',type:'tel'},
+                {label:'Email',key:'email',type:'email'},
+              ].map(f=>(
+                <div key={f.key} className="input-group" style={{marginBottom:0}}>
+                  <label className="input-label">{f.label}</label>
+                  <input className="input" type={f.type} value={form[f.key]}
+                    disabled={!editMode}
+                    onChange={e=>setForm(prev=>({...prev,[f.key]:e.target.value}))}
+                    style={{background:editMode?undefined:'var(--bg-subtle)',cursor:editMode?undefined:'default'}}/>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Emergency Contacts */}
+          <div className="card" style={{padding:24}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+              <div style={{fontWeight:700,fontSize:16}}>🚨 Emergency Contacts</div>
+              <button className="btn btn-primary btn-sm">
+                <Icon name="plus" size={14}/> Add Contact
+              </button>
+            </div>
+            {contacts.map((c,i)=>(
+              <div key={i} className="med-row" style={{marginBottom:8}}>
+                <div style={{fontSize:32}}>{c.emoji}</div>
+                <div style={{flex:1}}>
+                  <div style={{fontWeight:700,fontSize:14}}>{c.name}</div>
+                  <div style={{fontSize:12,color:'var(--text-3)'}}>{c.rel} • {c.phone}</div>
+                </div>
+                <button className="btn btn-primary btn-sm" onClick={()=>window.open(`tel:${c.phone}`)}>
+                  <Icon name="phone" size={12}/> Call
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* SETTINGS SIDEBAR */}
+        <div style={{display:'flex',flexDirection:'column',gap:14}}>
+          <div className="card" style={{padding:24}}>
+            <div style={{fontWeight:700,fontSize:16,marginBottom:16}}>⚙️ Settings</div>
+            {[
+              {label:'Push Notifications',sub:'Health reminders & alerts',state:notifications,set:setNotifications,icon:'🔔'},
+              {label:'Location Services',sub:'For emergency & pharmacy',state:location,set:setLocation,icon:'📍'},
+              {label:'Data Sharing',sub:'Anonymous health insights',state:sharing,set:setSharing,icon:'📊'},
+            ].map(s=>(
+              <div key={s.label} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'12px 0',borderBottom:'1px solid var(--border-hard)'}}>
+                <div style={{display:'flex',gap:10,alignItems:'center'}}>
+                  <span style={{fontSize:20}}>{s.icon}</span>
+                  <div>
+                    <div style={{fontSize:14,fontWeight:600}}>{s.label}</div>
+                    <div style={{fontSize:12,color:'var(--text-3)'}}>{s.sub}</div>
+                  </div>
+                </div>
+                <div className={`toggle${s.state?' on':''}`} onClick={()=>s.set(v=>!v)}/>
+              </div>
+            ))}
+          </div>
+
+          <div className="card" style={{padding:20}}>
+            <div style={{fontWeight:700,marginBottom:12}}>🏆 Health Achievements</div>
+            {[
+              {emoji:'🥇',name:'Hydration Hero',desc:'8 glasses 5 days in a row'},
+              {emoji:'🏃',name:'10K Warrior',desc:'Walked 10,000 steps daily'},
+              {emoji:'💊',name:'Med Master',desc:'100% medication adherence'},
+              {emoji:'🧘',name:'Zen Mind',desc:'7-day mindfulness streak'},
+            ].map((a,i)=>(
+              <div key={i} style={{display:'flex',gap:10,padding:'8px 0',borderBottom:i<3?'1px solid var(--border-hard)':'none'}}>
+                <span style={{fontSize:24}}>{a.emoji}</span>
+                <div>
+                  <div style={{fontWeight:700,fontSize:13}}>{a.name}</div>
+                  <div style={{fontSize:11,color:'var(--text-3)'}}>{a.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="card" style={{padding:20}}>
+            <div style={{fontWeight:700,marginBottom:12}}>📋 Account</div>
+            {['Download My Data','Privacy Settings','Delete Account','Log Out'].map((item,i)=>(
+              <button key={item} style={{
+                display:'flex',justifyContent:'space-between',alignItems:'center',
+                width:'100%',padding:'10px 0',
+                background:'transparent',border:'none',
+                borderBottom:i<3?'1px solid var(--border-hard)':'none',
+                cursor:'pointer',color:item==='Delete Account'||item==='Log Out'?'var(--coral)':'var(--text-2)',
+                fontSize:14,fontFamily:'DM Sans,sans-serif',fontWeight:500
+              }}>
+                {item}
+                <Icon name="chevRight" size={16} color="var(--text-4)"/>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   ROOT APP
+═══════════════════════════════════════════════════════════════ */
+const App = ()=>{
+  const [dark,setDark] = useState(false);
+  const [page,setPage] = useState('home');
+  const [drawerOpen,setDrawerOpen] = useState(false);
+  const [sosOpen,setSosOpen] = useState(false);
+
+  useEffect(()=>{
+    document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  },[dark]);
+
+  const pages = {
+    home:     <HomePage onNav={setPage}/>,
+    health:   <HealthTab/>,
+    symptom:  <SymptomChecker/>,
+    firstaid: <FirstAidTab/>,
+    remedies: <RemediesTab/>,
+    emergency:<EmergencyTab/>,
+    profile:  <ProfileTab/>,
+  };
+
+  return(
+    <div>
+      <Navbar dark={dark} onToggleDark={()=>setDark(d=>!d)}
+        onOpenDrawer={()=>setDrawerOpen(true)} onHome={()=>setPage('home')}/>
+
+      {drawerOpen&&<Drawer active={page} onSelect={setPage} onClose={()=>setDrawerOpen(false)}/>}
+
+      <main className="page-content">
+        {pages[page]||<HomePage onNav={setPage}/>}
+      </main>
+
+      {/* Floating SOS */}
+      <button className="sos-fab" onClick={()=>setSosOpen(true)} aria-label="Emergency SOS">
+        <span className="sos-icon">🆘</span>
+        <span>SOS</span>
+      </button>
+
+      {sosOpen&&<SOSModal onClose={()=>setSosOpen(false)}/>}
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
